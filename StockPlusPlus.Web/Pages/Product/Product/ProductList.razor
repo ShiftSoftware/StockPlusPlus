@@ -1,0 +1,15 @@
+﻿@attribute [Authorize]
+@attribute [Route($"/{nameof(ProductList)}")]
+
+@using StockPlusPlus.Shared.DTOs.Product.Product
+
+<ShiftList EntitySet="Product"
+           Title="Product List"
+           T="ProductListDTO"
+           Dense
+           ComponentType="typeof(ProductForm)"
+           ShowIDColumn="true"
+           TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
+           EnableExport>
+    <PropertyColumn Property="x => x.Name" Title="Name" />
+</ShiftList>

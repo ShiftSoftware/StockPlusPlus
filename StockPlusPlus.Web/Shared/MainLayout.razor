@@ -1,0 +1,44 @@
+﻿
+@inherits ShiftMainLayout
+@inject SettingManager SettingManager
+
+<MudRTLProvider RightToLeft="SettingManager.GetLanguage().RTL">
+
+    <AddMudProviders />
+
+    <MudLayout>
+
+        <MudAppBar>
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+            <MudLink Href="/"><MudText Style="color: #fff;">Stock Plus Plus</MudText></MudLink>
+
+            <MudSpacer />
+
+            <AuthorizeView>
+                <UserAvatar></UserAvatar>
+            </AuthorizeView>
+
+        </MudAppBar>
+
+        <MudDrawer @bind-Open="@_drawerOpen" ClipMode="DrawerClipMode.Docked" Elevation="1" Variant="@DrawerVariant.Mini" Breakpoint="Breakpoint.Lg" OpenMiniOnHover="true">
+            <NavMenu isDrawerOpen="_drawerOpen" />
+        </MudDrawer>
+
+        <MudMainContent>
+            <MudContainer MaxWidth="MaxWidth.ExtraLarge" Style="padding-block: 24px;">
+                @Body
+            </MudContainer>
+        </MudMainContent>
+
+    </MudLayout>
+
+</MudRTLProvider>
+
+@code {
+    bool _drawerOpen = false;
+
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+}

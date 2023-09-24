@@ -1,0 +1,19 @@
+﻿@attribute [Route($"/{nameof(ProductForm)}/{{Key?}}")]
+
+@using StockPlusPlus.Shared.DTOs.Product.Product
+
+@inherits ShiftForm<ProductForm, ProductDTO>
+
+<ShiftEntityForm @bind-Mode="Mode"
+                 @bind-Value="TheItem"
+                 @ref="FormContainer"
+                 Action="Product"
+                 Title="Product"
+                 TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
+                 @bind-Key="@Key">
+
+    <MudTextFieldExtended OnlyValidateIfDirty="true"
+                          Label="Name"
+                          @bind-Value="TheItem.Name"
+                          For="@(() => TheItem.Name)" />
+</ShiftEntityForm>

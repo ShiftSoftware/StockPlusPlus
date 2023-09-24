@@ -1,0 +1,15 @@
+﻿@attribute [Authorize]
+@attribute [Route($"/{nameof(BrandList)}")]
+
+@using StockPlusPlus.Shared.DTOs.Product.Brand
+
+<ShiftList EntitySet="Brand"
+           Title="Brand List"
+           T="BrandListDTO"
+           Dense
+           ComponentType="typeof(BrandForm)"
+           ShowIDColumn="true"
+           TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Brand"
+           EnableExport>
+    <PropertyColumn Property="x => x.Name" Title="Name" />
+</ShiftList>

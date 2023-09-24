@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\ShiftFrameworkGlobalSettings.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\StockPlusPlus.Shared\StockPlusPlus.Shared.csproj" />
+		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+		<ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Data\ShiftIdentity.Data.csproj" Condition="Exists('..\..\ShiftIdentity\ShiftIdentity.Data\ShiftIdentity.Data.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Azure.Storage.Queues" Version="12.15.0" />
+		<PackageReference Include="Microsoft.Extensions.Azure" Version="1.6.3" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.20">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="ShiftSoftware.ShiftEntity.EFCore" Version="$(ShiftFrameworkVersion)" />
+		<PackageReference Include="ShiftSoftware.ShiftIdentity.Data" Version="$(ShiftFrameworkVersion)" />
+	</ItemGroup>
+</Project>
