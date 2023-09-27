@@ -18,6 +18,24 @@
                           @bind-Value="TheItem.Name"
                           For="@(() => TheItem.Name)" />
 
+    <MudTextFieldExtended OnlyValidateIfDirty="true"
+                          Label="Description"
+                          @bind-Value="TheItem.Description"
+                          For="@(() => TheItem.Description)" />
+
+    <MudTextFieldExtended OnlyValidateIfDirty="true"
+                          Label="Code"
+                          @bind-Value="TheItem.Code"
+                          For="@(() => TheItem.Code)" />
+
+    <FileUploader Url="/file/upload"
+                  ShowThumbnail="true"
+                  Label="Attachments"
+                  TypeAuthAction="StockPlusPlus.Shared.ActionTrees.SystemActionTrees.UploadFiles"
+                  For="() => TheItem.Photos"
+                  AcceptImages="true"
+                  @bind-Values="TheItem.Photos" />
+
     <MudSelectExtended OnlyValidateIfDirty="true"
                        T="TrackingMethod"
                        Label="Tracking Method"

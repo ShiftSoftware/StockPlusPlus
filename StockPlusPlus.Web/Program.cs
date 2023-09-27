@@ -69,6 +69,7 @@ builder.Services.AddTypeAuth(x =>
     x
     .AddActionTree<ShiftSoftware.ShiftIdentity.Core.ShiftIdentityActions>()
     .AddActionTree<StockActionTrees>()
+    .AddActionTree<SystemActionTrees>()
 );
 
 var host = builder.Build();

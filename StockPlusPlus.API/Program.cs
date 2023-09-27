@@ -137,6 +137,7 @@ builder.Services.AddScoped<AzureStorageService>();
 builder.Services.AddTypeAuth((o) =>
 {
     o.AddActionTree<ShiftIdentityActions>();
+    o.AddActionTree<StockPlusPlus.Shared.ActionTrees.SystemActionTrees>();
     o.AddActionTree<StockPlusPlus.Shared.ActionTrees.StockActionTrees>();
 });
 
