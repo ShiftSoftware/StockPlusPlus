@@ -10,7 +10,6 @@ using StockPlusPlus.Data;
 using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Extentsions;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Extensions;
 using ShiftSoftware.ShiftEntity.Web.Services;
-using ShiftSoftware.ShiftEntity.Core.Services;
 using Microsoft.Extensions.Azure;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
 using System.Globalization;
@@ -131,8 +130,6 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<BrandRepository>();
 builder.Services.AddScoped<ProductCategoryRepository>();
 builder.Services.AddScoped<ProductRepository>();
-
-builder.Services.AddScoped<AzureStorageService>();
 
 builder.Services.AddTypeAuth((o) =>
 {
