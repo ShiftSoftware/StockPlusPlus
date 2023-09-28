@@ -57,6 +57,12 @@ builder.Services
         x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
         x.HashId.RegisterIdentityHashId("one-two", 5);
 
+        var azureStorageAccounts = new List<ShiftSoftware.ShiftEntity.Core.Services.AzureStorageOption>();
+
+        builder.Configuration.Bind("AzureStorageAccounts", azureStorageAccounts);
+
+        x.AddAzureStorage(azureStorageAccounts.ToArray());
+
         x.AddShiftIdentityAutoMapper();
     })
     .AddShiftIdentity(builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!, builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!)

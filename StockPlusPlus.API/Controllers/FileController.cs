@@ -25,7 +25,7 @@ namespace StockPlusPlus.API.Controllers
 
         [HttpPost("upload")]
         [TypeAuth(typeof(SystemActionTrees), nameof(SystemActionTrees.UploadFiles), Access.Write)]
-        public async Task<IActionResult> UploadAsync(IFormFile file)
+        public async Task<IActionResult> UploadAsync(IFormFile file, [FromHeader(Name = "Account-Name")] string? AccountName, [FromHeader(Name = "Container-Name")] string? ContainerName)
         {
             var res = new ShiftEntityResponse<ShiftFileDTO>();
 
@@ -38,15 +38,21 @@ namespace StockPlusPlus.API.Controllers
                 return Ok(res);
             }
 
-            string? cloudUrl;
+
             string? blob;
+
+            AccountName = AccountName ?? azureStorageService.GetDefaultAccountName();
+            ContainerName = ContainerName ?? azureStorageService.GetDefaultContainerName(AccountName);
+
             try
             {
-                blob = await azureStorageService.UploadAsync(file);
-                cloudUrl = azureStorageService.GetSignedURL(blob);
+                Stream s = new MemoryStream();
+
+                await file.CopyToAsync(s);
+
+                blob = await azureStorageService.UploadAsync(file.Name, s, ContainerName, AccountName);
 
                 if (blob == null) throw new Exception("Could not retrieve blob name");
-                if (cloudUrl == null) throw new Exception("Could not retrieve blob url");
             }
             catch (Exception e)
             {
@@ -57,10 +63,11 @@ namespace StockPlusPlus.API.Controllers
             res.Entity = new ShiftFileDTO
             {
                 Name = file.FileName,
-                Url = cloudUrl,
                 Blob = blob,
                 ContentType = file.ContentType,
                 Size = file.Length,
+                AccountName = AccountName,
+                ContainerName = ContainerName,
             };
 
             try
