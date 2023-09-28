@@ -2,14 +2,57 @@
 @attribute [Route($"/{nameof(ProductList)}")]
 
 @using StockPlusPlus.Shared.DTOs.Product.Product
+@using System.Linq.Expressions;
 
 <ShiftList EntitySet="Product"
            Title="Product List"
            T="ProductListDTO"
            Dense
-           ComponentType="typeof(ProductForm)"
-           ShowIDColumn="true"
-           TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
+            Where="Where"
+            ComponentType="typeof(ProductForm)"
+            ShowIDColumn="true"
+            TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
+            AddDialogParameters="AddDialogParameters"
            EnableExport>
     <PropertyColumn Property="x => x.Name" Title="Name" />
+    <PropertyColumn Property="x => x.Brand" Title="Brand" />
+    <PropertyColumn Property="x => x.Category" Title="Category" />
 </ShiftList>
+
+@code {
+
+    public Dictionary<string, string> AddDialogParameters = new();
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? ProductCategoryID { get; set; }
+
+    [Parameter]
+    [SupplyParameterFromQuery]
+    public string? BrandID { get; set; }
+
+    public Expression<Func<ProductListDTO, bool>>? Where = null;
+
+    protected override void OnInitialized()
+    {
+        AddDialogParameters = new();
+
+        if (!string.IsNullOrWhiteSpace(ProductCategoryID))
+            AddDialogParameters[nameof(ProductForm.ProductCategoryID)] = ProductCategoryID;
+
+        if (!string.IsNullOrWhiteSpace(BrandID))
+            AddDialogParameters[nameof(ProductForm.BrandID)] = BrandID;
+
+
+
+
+        if (string.IsNullOrWhiteSpace(ProductCategoryID) && !string.IsNullOrWhiteSpace(BrandID))
+            Where = x => x.BrandID == BrandID;
+
+        if (!string.IsNullOrWhiteSpace(ProductCategoryID) && string.IsNullOrWhiteSpace(BrandID))
+            Where = x => x.ProductCategoryID == ProductCategoryID;
+
+        if (!string.IsNullOrWhiteSpace(ProductCategoryID) && !string.IsNullOrWhiteSpace(BrandID))
+            Where = x => x.ProductCategoryID == ProductCategoryID && x.BrandID == BrandID;
+    }
+}

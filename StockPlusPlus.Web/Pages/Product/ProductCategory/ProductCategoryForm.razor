@@ -1,7 +1,7 @@
 ﻿@attribute [Route($"/{nameof(ProductCategoryForm)}/{{Key?}}")]
 
 @using StockPlusPlus.Shared.DTOs.Product.ProductCategory
-@using StockPlusPlus.Shared.Enums.Product;
+@using StockPlusPlus.Shared.Enums.Product
 
 @inherits ShiftForm<ProductCategoryForm, ProductCategoryDTO>
 
@@ -48,6 +48,14 @@
             <MudSelectItem Value="@x">@x.Describe()</MudSelectItem>
         }
     </MudSelectExtended>
+
+    @if (Mode == FormModes.View)
+    {
+        <br />
+        <br />
+
+        <ProductList ProductCategoryID="@TheItem.ID" />
+    }
 </ShiftEntityForm>
 
 

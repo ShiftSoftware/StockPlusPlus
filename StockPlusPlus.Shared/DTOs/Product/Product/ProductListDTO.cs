@@ -12,6 +12,14 @@ public class ProductListDTO : ShiftEntityListDTO
     public override string? ID { get; set; }
     public string Name { get; set; } = default!;
 
+    public string? Brand { get; set; }
+    public string? Category { get; set; }
+
+    [_ProductCategoryHashId]
+    public string? ProductCategoryID { get; set; }
+
+    public string? BrandID { get; set; }
+
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public TrackingMethod TrackingMethod { get; set; }
 }

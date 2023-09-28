@@ -1,6 +1,7 @@
 ﻿@attribute [Route($"/{nameof(BrandForm)}/{{Key?}}")]
 
 @using StockPlusPlus.Shared.DTOs.Product.Brand
+@using StockPlusPlus.Shared.Enums.Product
 
 @inherits ShiftForm<BrandForm, BrandDTO>
 
@@ -16,6 +17,14 @@
                           Label="Name"
                           @bind-Value="TheItem.Name"
                           For="@(() => TheItem.Name)" />
+
+    @if (Mode == FormModes.View)
+    {
+        <br />
+        <br />
+
+        <StockPlusPlus.Web.Pages.Product.Product.ProductList BrandID="@TheItem.ID" />
+    }
 </ShiftEntityForm>
 
 

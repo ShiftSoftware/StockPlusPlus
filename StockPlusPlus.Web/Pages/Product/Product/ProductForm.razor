@@ -43,3 +43,25 @@
                                    QuickAddComponentType="typeof(Pages.Product.ProductCategory.ProductCategoryForm)"
                                    QuickAddParameterName="@nameof(Pages.Product.ProductCategory.ProductCategoryForm.ProductCategoryName)" />
 </ShiftEntityForm>
+
+
+@code {
+    [Parameter]
+    public string? ProductCategoryID { get; set; }
+
+    [Parameter]
+    public string? BrandID { get; set; }
+
+    protected override void OnInitialized()
+    {
+        if (!string.IsNullOrWhiteSpace(ProductCategoryID))
+        {
+            TheItem.ProductCategory = new ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO { Value = ProductCategoryID };
+        }
+
+        if (!string.IsNullOrWhiteSpace(BrandID))
+        {
+            TheItem.Brand = new ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO { Value = BrandID };
+        }
+    }
+}

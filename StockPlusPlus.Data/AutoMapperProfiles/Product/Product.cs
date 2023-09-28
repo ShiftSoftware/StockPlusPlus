@@ -31,6 +31,8 @@ public class Product : Profile
                     opt => opt.MapFrom(src => src.Brand.Value.ToLong())
                 );
 
-        CreateMap<Entities.Product.Product, ProductListDTO>();
+        CreateMap<Entities.Product.Product, ProductListDTO>()
+            .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Brand == null ? null : src.Brand.Name))
+            .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.ProductCategory == null ? null : src.ProductCategory.Name));
     }
 }
