@@ -7,7 +7,8 @@ namespace StockPlusPlus.Data.Repositories.Product;
 
 public class ProductRepository : ShiftRepository<DB, Entities.Product.Product, ProductListDTO, ProductDTO>
 {
-    public ProductRepository(DB db, IMapper mapper) : base(db, db.Products, mapper)
+    //The ProductCategory is intentionally not included to show that the ShiftAutoComplete can handle this asynchronously by making a get request to the oData endpoint.
+    public ProductRepository(DB db, IMapper mapper) : base(db, db.Products, mapper, x => x.IncludeRelatedEntitiesWithFindAsync(y => y.Include(z => z.Brand)))
     {
     }
 }

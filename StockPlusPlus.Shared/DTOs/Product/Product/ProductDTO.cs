@@ -14,4 +14,9 @@ public class ProductDTO : ShiftEntityDTO
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public TrackingMethod TrackingMethod { get; set; }
+
+    [_ProductCategoryHashId]
+    public ShiftEntitySelectDTO ProductCategory { get; set; } = default!;
+
+    public ShiftEntitySelectDTO Brand { get; set; } = default!;
 }

@@ -16,4 +16,30 @@
                           Label="Name"
                           @bind-Value="TheItem.Name"
                           For="@(() => TheItem.Name)" />
+
+    <ShiftAutocompleteWithQuickAdd Label="Brand"
+                                   T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
+                                   @bind-Value="TheItem.Brand"
+                                   ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
+                                   EntitySet="Brand"
+                                   TEntitySet="StockPlusPlus.Shared.DTOs.Product.Brand.BrandListDTO"
+                                   Where="@(q => x => x.Name!.Contains(q))"
+                                   DataValueField="@nameof(StockPlusPlus.Shared.DTOs.Product.Brand.BrandListDTO.ID)"
+                                   DataTextField="@nameof(StockPlusPlus.Shared.DTOs.Product.Brand.BrandListDTO.Name)"
+                                   TQuickAdd="StockPlusPlus.Shared.DTOs.Product.Brand.BrandDTO"
+                                   QuickAddComponentType="typeof(Pages.Product.Brand.BrandForm)"
+                                   QuickAddParameterName="@nameof(Pages.Product.Brand.BrandForm.BrandName)" />
+
+    <ShiftAutocompleteWithQuickAdd Label="ProductCategory"
+                                   T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
+                                   @bind-Value="TheItem.ProductCategory"
+                                   ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
+                                   EntitySet="ProductCategory"
+                                   TEntitySet="StockPlusPlus.Shared.DTOs.Product.ProductCategory.ProductCategoryListDTO"
+                                   Where="@(q => x => x.Name!.Contains(q))"
+                                   DataValueField="@nameof(StockPlusPlus.Shared.DTOs.Product.ProductCategory.ProductCategoryListDTO.ID)"
+                                   DataTextField="@nameof(StockPlusPlus.Shared.DTOs.Product.ProductCategory.ProductCategoryListDTO.Name)"
+                                   TQuickAdd="StockPlusPlus.Shared.DTOs.Product.ProductCategory.ProductCategoryDTO"
+                                   QuickAddComponentType="typeof(Pages.Product.ProductCategory.ProductCategoryForm)"
+                                   QuickAddParameterName="@nameof(Pages.Product.ProductCategory.ProductCategoryForm.ProductCategoryName)" />
 </ShiftEntityForm>
