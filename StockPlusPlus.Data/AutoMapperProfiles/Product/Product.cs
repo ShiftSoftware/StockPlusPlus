@@ -2,6 +2,7 @@
 
 using AutoMapper;
 using ShiftSoftware.ShiftEntity.Model.Dtos;
+using StockPlusPlus.Data.ReplicationModels;
 using StockPlusPlus.Shared.DTOs.Product.Product;
 
 namespace StockPlusPlus.Data.AutoMapperProfiles.Product;
@@ -32,5 +33,6 @@ public class Product : Profile
                 );
 
         CreateMap<Entities.Product.Product, ProductListDTO>();
+        CreateMap<Entities.Product.Product, ProductModel>();
     }
 }

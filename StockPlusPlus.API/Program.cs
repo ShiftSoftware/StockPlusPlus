@@ -41,6 +41,7 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
         x.ConnectionString = builder.Configuration.GetValue<string>("CosmosDb:ConnectionString");
         x.DefaultDatabaseName = builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName");
         x.AddShiftDbContext<DB>(dbOptionBuilder);
+        x.RepositoriesAssembly= typeof(DB).Assembly;
     });
 }
 
@@ -72,7 +73,7 @@ builder.Services
             ShiftIdentityHostingType = ShiftIdentityHostingTypes.Internal,
             Token = new TokenSettingsModel
             {
-                ExpireSeconds = 6000,
+                ExpireSeconds = 60000,
                 Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
                 Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
             },
@@ -85,7 +86,7 @@ builder.Services
             RefreshToken = new TokenSettingsModel
             {
                 Audience = "stock-plus-plus",
-                ExpireSeconds = 600000,
+                ExpireSeconds = 60000000,
                 Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
                 Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
             },
