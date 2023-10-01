@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using ShiftSoftware.ShiftEntity.Model.Dtos;
 using StockPlusPlus.Shared.Enums.Product;
 
 namespace StockPlusPlus.Data.ReplicationModels;
 
-public class ProductModel
+public class ProductModel : ShiftEntityDTO
 {
-    public string ID { get; set; }
+    public override string? ID { get; set; }
 
     public string Name { get; set; } = default!;
 
@@ -16,6 +17,4 @@ public class ProductModel
     public long ProductCategoryID { get; set; }
 
     public long BrandID { get; set; }
-
-    public bool IsDeleted { get; set; }
 }
