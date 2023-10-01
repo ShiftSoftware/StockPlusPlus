@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<Import Project="..\ShiftFrameworkGlobalSettings.props" />
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AzureFunctionsVersion>v4</AzureFunctionsVersion>
+		<!--<_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>-->
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!--Functions Runtime contain a version of System.Text.Json. The ShiftEntity.Model contains a newer version.
+		Below is required to prevent the runtime from removing the version that's shipped with ShiftEntity.Model-->
+		<FunctionsPreservedDependencies Include="System.Text.Json.dll" />
+		<FunctionsPreservedDependencies Include="System.Text.Encodings.Web.dll" />
+
+		<!--This has to be done for any package that needs to be Preserved. If we want to prserve all then we need to set _FunctionsSkipCleanOutput to true.
+		setting _FunctionsSkipCleanOutput is not very efficient though
+		-->
+	</ItemGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
+		<PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.2.0" />
+
+		<PackageReference Include="ShiftSoftware.ShiftEntity.EFCore" Version="$(ShiftFrameworkVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\StockPlusPlus.Data\StockPlusPlus.Data.csproj" />
+		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="host.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="local.settings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+</Project>

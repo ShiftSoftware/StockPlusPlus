@@ -50,7 +50,7 @@ builder.Services
     .AddHttpContextAccessor()
     .AddDbContext<DB>(dbOptionBuilder)
     .AddControllers()
-    .AddShiftEntity(x =>
+    .AddShiftEntityWeb(x =>
     {
         x.WrapValidationErrorResponseWithShiftEntityResponse(true);
         x.AddAutoMapper(typeof(StockPlusPlus.Data.Marker).Assembly);
