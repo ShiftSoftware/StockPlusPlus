@@ -2,6 +2,7 @@
 
 using AutoMapper;
 using ShiftSoftware.ShiftEntity.Model.Dtos;
+using StockPlusPlus.Data.ReplicationModels;
 using StockPlusPlus.Shared.DTOs.Product.Product;
 
 namespace StockPlusPlus.Data.AutoMapperProfiles.Product;
