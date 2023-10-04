@@ -31,28 +31,24 @@
     [SupplyParameterFromQuery]
     public string? BrandID { get; set; }
 
-    public Expression<Func<ProductListDTO, bool>>? Where = null;
+    public Expression<Func<ProductListDTO, bool>> Where = x => true;
 
     protected override void OnInitialized()
     {
         AddDialogParameters = new();
 
         if (!string.IsNullOrWhiteSpace(ProductCategoryID))
+        {
             AddDialogParameters[nameof(ProductForm.ProductCategoryID)] = ProductCategoryID;
 
+            Where = Where.AndAlso(x => x.ProductCategoryID == ProductCategoryID);
+        }
+
         if (!string.IsNullOrWhiteSpace(BrandID))
+        {
             AddDialogParameters[nameof(ProductForm.BrandID)] = BrandID;
 
-
-
-
-        if (string.IsNullOrWhiteSpace(ProductCategoryID) && !string.IsNullOrWhiteSpace(BrandID))
-            Where = x => x.BrandID == BrandID;
-
-        if (!string.IsNullOrWhiteSpace(ProductCategoryID) && string.IsNullOrWhiteSpace(BrandID))
-            Where = x => x.ProductCategoryID == ProductCategoryID;
-
-        if (!string.IsNullOrWhiteSpace(ProductCategoryID) && !string.IsNullOrWhiteSpace(BrandID))
-            Where = x => x.ProductCategoryID == ProductCategoryID && x.BrandID == BrandID;
+            Where = Where.AndAlso(x => x.BrandID == BrandID);
+        }
     }
 }
