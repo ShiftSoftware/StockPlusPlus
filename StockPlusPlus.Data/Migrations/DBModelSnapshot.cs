@@ -62,7 +62,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.HasIndex("LastReplicationDate");
 
-                    b.ToTable("DeletedRowLogs");
+                    b.ToTable("DeletedRowLogs", (string)null);
                 });
 
             modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.AccessTree", b =>
@@ -923,7 +923,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
@@ -1001,7 +1001,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.HasIndex("ProductCategoryID");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
@@ -1078,7 +1078,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("ProductCategories");
+                    b.ToTable("ProductCategories", (string)null);
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
