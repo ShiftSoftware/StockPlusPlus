@@ -65,6 +65,7 @@ builder.Services
         x.AddAzureStorage(azureStorageAccounts.ToArray());
 
         x.AddShiftIdentityAutoMapper();
+        x.RepositoriesAssembly = typeof(StockPlusPlus.Data.Marker).Assembly;
     })
     .AddShiftIdentity(builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!, builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!)
     .AddShiftIdentityDashboard<DB>(
