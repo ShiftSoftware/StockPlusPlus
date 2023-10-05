@@ -3,20 +3,26 @@
 
 @using StockPlusPlus.Shared.DTOs.Product.Product
 @using System.Linq.Expressions;
+@using StockPlusPlus.Web.Pages.Product.Brand;
+@using StockPlusPlus.Web.Pages.Product.ProductCategory;
 
 <ShiftList EntitySet="Product"
            Title="Product List"
            T="ProductListDTO"
            Dense
-            Where="Where"
-            ComponentType="typeof(ProductForm)"
-            ShowIDColumn="true"
-            TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
-            AddDialogParameters="AddDialogParameters"
+           Where="Where"
+           ComponentType="typeof(ProductForm)"
+           ShowIDColumn="true"
+           TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
+           AddDialogParameters="AddDialogParameters"
            EnableExport>
     <PropertyColumn Property="x => x.Name" Title="Name" />
-    <PropertyColumn Property="x => x.Brand" Title="Brand" />
-    <PropertyColumn Property="x => x.Category" Title="Category" />
+    <ButtonColumn ComponentType="typeof(BrandForm)" KeyPropertyName="@nameof(ProductListDTO.BrandID)" Property="x => x.Brand" Title="Brand">
+        <ButtonTemplate>
+            <MudChip Style="cursor: pointer;" Icon="@Icons.Material.Filled.BrandingWatermark" Variant="Variant.Outlined">@context</MudChip>
+        </ButtonTemplate>
+    </ButtonColumn>
+    <ButtonColumn ComponentType="typeof(ProductCategoryForm)" KeyPropertyName="@nameof(ProductListDTO.ProductCategoryID)" OpenMode="ModalOpenMode.NewTab" Property="x => x.Category" Title="Category" />
 </ShiftList>
 
 @code {
