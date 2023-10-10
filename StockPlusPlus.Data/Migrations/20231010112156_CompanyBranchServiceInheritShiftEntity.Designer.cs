@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StockPlusPlus.Data;
 
@@ -11,9 +12,10 @@ using StockPlusPlus.Data;
 namespace StockPlusPlus.Data.Migrations
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20231010112156_CompanyBranchServiceInheritShiftEntity")]
+    partial class CompanyBranchServiceInheritShiftEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -420,28 +422,7 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long>("CompanyBranchID")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("CompanyID")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("CreatedByUserID")
-                        .HasColumnType("bigint");
-
                     b.Property<long>("DepartmentID")
-                        .HasColumnType("bigint");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("LastReplicationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("LastSaveDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("PeriodEnd")
@@ -453,9 +434,6 @@ namespace StockPlusPlus.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("datetime2")
                         .HasColumnName("PeriodStart");
-
-                    b.Property<long?>("RegionID")
-                        .HasColumnType("bigint");
 
                     b.HasKey("ID");
 
