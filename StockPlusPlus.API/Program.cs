@@ -18,6 +18,7 @@ using StockPlusPlus.Data.Repositories.Product;
 using StockPlusPlus.Shared.DTOs.Product.ProductCategory;
 using StockPlusPlus.Shared.DTOs.Product.Brand;
 using StockPlusPlus.Shared.DTOs.Product.Product;
+using ShiftSoftware.ShiftEntity.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +43,9 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
         x.DefaultDatabaseName = builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName");
         x.AddShiftDbContext<DB>(dbOptionBuilder);
         x.RepositoriesAssembly= typeof(DB).Assembly;
+
+        x.Accounts.Add(new CosmosDBAccount(builder.Configuration.GetValue<string>("CosmosDb:ConnectionString")!,
+            "Identity", false, builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName")));
     });
 }
 
