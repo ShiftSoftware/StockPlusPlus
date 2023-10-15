@@ -1,7 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using ShiftSoftware.ShiftEntity.CosmosDbReplication.Extensions;
-using ShiftSoftware.ShiftEntity.EFCore.Extensions;
-using ShiftSoftware.ShiftEntity.Web.Extensions;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
 using ShiftSoftware.ShiftIdentity.AspNetCore;
 using ShiftSoftware.ShiftIdentity.Core;

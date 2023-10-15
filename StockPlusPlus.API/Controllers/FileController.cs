@@ -5,7 +5,6 @@ using System.Drawing;
 using ShiftSoftware.TypeAuth.AspNetCore;
 using ShiftSoftware.TypeAuth.Core;
 using ShiftSoftware.ShiftEntity.Core.Services;
-using ShiftSoftware.ShiftEntity.Web.Extensions;
 using StockPlusPlus.Shared.ActionTrees;
 
 namespace StockPlusPlus.API.Controllers

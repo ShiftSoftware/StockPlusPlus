@@ -3,13 +3,10 @@ using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ShiftSoftware.ShiftEntity.Core.Extensions;
 using StockPlusPlus.Data;
 using StockPlusPlus.Data.Repositories.Product;
 using StockPlusPlus.Functions;
 using System;
-using ShiftSoftware.ShiftEntity.EFCore.Extensions;
-using ShiftSoftware.ShiftEntity.Core;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 namespace StockPlusPlus.Functions;
