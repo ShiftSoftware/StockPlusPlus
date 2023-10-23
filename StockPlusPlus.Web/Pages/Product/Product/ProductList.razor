@@ -10,13 +10,15 @@
            Title="Product List"
            T="ProductListDTO"
            Dense
-           Where="Where"
-           ComponentType="typeof(ProductForm)"
-           ShowIDColumn="true"
-           TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
-           AddDialogParameters="AddDialogParameters"
+            Where="Where"
+            ComponentType="typeof(ProductForm)"
+            ShowIDColumn="true"
+            TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
+            AddDialogParameters="AddDialogParameters"
            EnableExport>
     <PropertyColumn Property="x => x.Name" Title="Name" />
+    <PropertyColumn Format="F" Property="x => x.LastSaveDate.ToLocalTime()" Title="SaveDate" />
+    <PropertyColumn Format="F" Property="x => x.ReleaseDate" Title="Release Date"></PropertyColumn>
     <ButtonColumn ComponentType="typeof(BrandForm)" KeyPropertyName="@nameof(ProductListDTO.BrandID)" Property="x => x.Brand" Title="Brand">
         <ButtonTemplate>
             <MudChip Style="cursor: pointer;" Icon="@Icons.Material.Filled.BrandingWatermark" Variant="Variant.Outlined">@context</MudChip>

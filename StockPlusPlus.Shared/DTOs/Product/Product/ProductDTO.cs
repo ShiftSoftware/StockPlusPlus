@@ -19,4 +19,5 @@ public class ProductDTO : ShiftEntityDTO
     public ShiftEntitySelectDTO ProductCategory { get; set; } = default!;
 
     public ShiftEntitySelectDTO Brand { get; set; } = default!;
+    public DateTimeOffset? ReleaseDate { get; set; }
 }

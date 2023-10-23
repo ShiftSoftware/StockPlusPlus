@@ -17,6 +17,10 @@
                           @bind-Value="TheItem.Name"
                           For="@(() => TheItem.Name)" />
 
+    <ShiftDateTimePicker DateLabel="Date"
+                         TimeLabel="Time"
+                         @bind-DateTimeOffset="TheItem.ReleaseDate" />
+
     <ShiftAutocompleteWithQuickAdd Label="Brand"
                                    T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
                                    @bind-Value="TheItem.Brand"

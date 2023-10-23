@@ -23,4 +23,6 @@ public class Product : ShiftEntity<Product>
     public virtual ProductCategory? ProductCategory { get; set; }
 
     public virtual Brand? Brand { get; set; }
+
+    public DateTimeOffset? ReleaseDate { get; set; }
 }

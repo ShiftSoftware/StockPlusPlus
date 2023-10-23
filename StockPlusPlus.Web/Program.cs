@@ -24,8 +24,6 @@ builder.Services.AddScoped(sp =>
         BaseAddress = new Uri(builder.Configuration!.GetValue<string>("BaseURL")!)
     };
 
-    httpClient.DefaultRequestHeaders.Add("timezone-offset", TimeZoneInfo.Local.BaseUtcOffset.ToString("c"));
-
     return httpClient;
 });
 

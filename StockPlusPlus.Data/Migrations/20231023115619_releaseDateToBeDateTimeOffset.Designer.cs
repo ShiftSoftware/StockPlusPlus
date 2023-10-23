@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StockPlusPlus.Data;
 
@@ -11,9 +12,10 @@ using StockPlusPlus.Data;
 namespace StockPlusPlus.Data.Migrations
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20231023115619_releaseDateToBeDateTimeOffset")]
+    partial class releaseDateToBeDateTimeOffset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,8 +81,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long?>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -88,11 +90,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -162,8 +164,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long?>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -180,11 +182,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -250,8 +252,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<int>("CompanyType")
                         .HasColumnType("int");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -271,11 +273,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -342,8 +344,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -357,11 +359,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -423,8 +425,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long?>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -435,11 +437,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -491,8 +493,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long?>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -500,11 +502,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -559,8 +561,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long?>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -568,11 +570,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -627,8 +629,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long?>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -639,11 +641,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -698,8 +700,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long?>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -707,11 +709,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -772,8 +774,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -796,11 +798,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsSuperAdmin")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -931,8 +933,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long?>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -943,11 +945,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -1002,8 +1004,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long?>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -1011,11 +1013,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");
@@ -1083,8 +1085,8 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<long?>("CompanyID")
                         .HasColumnType("bigint");
 
-                    b.Property<DateTimeOffset>("CreateDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("CreatedByUserID")
                         .HasColumnType("bigint");
@@ -1095,11 +1097,11 @@ namespace StockPlusPlus.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<DateTimeOffset?>("LastReplicationDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime?>("LastReplicationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<DateTimeOffset>("LastSaveDate")
-                        .HasColumnType("datetimeoffset");
+                    b.Property<DateTime>("LastSaveDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<long?>("LastSavedByUserID")
                         .HasColumnType("bigint");

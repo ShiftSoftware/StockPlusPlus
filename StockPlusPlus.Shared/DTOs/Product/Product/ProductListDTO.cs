@@ -22,4 +22,6 @@ public class ProductListDTO : ShiftEntityListDTO
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public TrackingMethod TrackingMethod { get; set; }
+    public DateTimeOffset? ReleaseDate { get; set; }
+    public DateTimeOffset LastSaveDate { get; set; }
 }
