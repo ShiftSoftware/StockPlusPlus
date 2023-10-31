@@ -17,7 +17,7 @@
             AddDialogParameters="AddDialogParameters"
            EnableExport>
     <PropertyColumn Property="x => x.Name" Title="Name" />
-    <PropertyColumn Format="F" Property="x => x.LastSaveDate.ToLocalTime()" Title="SaveDate" />
+    <PropertyColumn Format="F" Property="x => x.LastSaveDate.DateTime" Title="SaveDate" />
     <PropertyColumn Format="F" Property="x => x.ReleaseDate" Title="Release Date"></PropertyColumn>
     <ButtonColumn ComponentType="typeof(BrandForm)" KeyPropertyName="@nameof(ProductListDTO.BrandID)" Property="x => x.Brand" Title="Brand">
         <ButtonTemplate>
