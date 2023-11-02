@@ -4,6 +4,7 @@ using StockPlusPlus.Shared.Enums.Product;
 namespace StockPlusPlus.Data.Entities.Product;
 
 [TemporalShiftEntity]
+[ShiftEntityValueText(nameof(ID), nameof(Name))]
 public class ProductCategory: ShiftEntity<ProductCategory>
 {
     public string Name { get; set; } = default!;
