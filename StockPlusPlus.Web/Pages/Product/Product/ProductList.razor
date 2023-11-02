@@ -18,7 +18,16 @@
            EnableExport>
     <PropertyColumn Property="x => x.Name" Title="Name" />
     <PropertyColumn Format="F" Property="x => x.LastSaveDate.DateTime" Title="SaveDate" />
-    <PropertyColumn Format="F" Property="x => x.ReleaseDate" Title="Release Date"></PropertyColumn>
+
+    <PropertyColumn Format="F" Property="x => x.ReleaseDate.DateTime" Title="Release Date">
+        <CellTemplate>
+            @if (context?.Item?.ReleaseDate.DateTime > DateTimeOffset.MinValue)
+            {
+                @context.Item.ReleaseDate.DateTime
+            }
+        </CellTemplate>
+    </PropertyColumn>
+
     <ButtonColumn ComponentType="typeof(BrandForm)" KeyPropertyName="@nameof(ProductListDTO.BrandID)" Property="x => x.Brand" Title="Brand">
         <ButtonTemplate>
             <MudChip Style="cursor: pointer;" Icon="@Icons.Material.Filled.BrandingWatermark" Variant="Variant.Outlined">@context</MudChip>
