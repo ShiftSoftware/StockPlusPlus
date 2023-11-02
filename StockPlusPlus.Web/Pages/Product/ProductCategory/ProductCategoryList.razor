@@ -7,11 +7,12 @@
            Title="Product Category List"
            T="ProductCategoryListDTO"
            Dense
-           ComponentType="typeof(ProductCategoryForm)"
-           ShowIDColumn="true"
-           TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.ProductCategory"
+           DisableActionColumn
+            ComponentType="typeof(ProductCategoryForm)"
+            ShowIDColumn="true"
+            TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.ProductCategory"
            EnableExport>
-    <PropertyColumn Property="x => x.Name" Title="Name" />
+    <ButtonColumn Property="x => x.Name" Title="Name" />
 
     <TemplateColumn Title="Tracking Method">
         <CellTemplate>

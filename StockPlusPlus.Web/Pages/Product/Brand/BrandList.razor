@@ -7,9 +7,10 @@
            Title="Brand List"
            T="BrandListDTO"
            Dense
-           ComponentType="typeof(BrandForm)"
-           ShowIDColumn="true"
-           TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Brand"
+           DisableActionColumn
+            ComponentType="typeof(BrandForm)"
+            ShowIDColumn="true"
+            TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Brand"
            EnableExport>
 
     <ButtonColumn Property="x => x.Name" Title="Name" />
