@@ -7,14 +7,14 @@ namespace StockPlusPlus.Shared.ActionTrees;
 [ActionTree("Stock", "Stock")]
 public class StockActionTrees
 {
-    public readonly static ReadWriteDeleteAction Brand = new ReadWriteDeleteAction("Brand");
-    public readonly static ReadWriteDeleteAction ProductCategory = new ReadWriteDeleteAction("Product Category");
-    public readonly static ReadWriteDeleteAction Product = new ReadWriteDeleteAction("Product");
+    public readonly static ReadWriteDeleteAction Brand = new("Brand");
+    public readonly static ReadWriteDeleteAction ProductCategory = new("Product Category");
+    public readonly static ReadWriteDeleteAction Product = new("Product");
 
     [ActionTree("Data Level Access", "Data Level or Row-Level Access")]
     public class DataLevelAccess
     {
-        public readonly static DynamicReadWriteDeleteAction Brand = new DynamicReadWriteDeleteAction("Brand"); 
-        public readonly static DynamicReadWriteDeleteAction ProductCategory = new DynamicReadWriteDeleteAction("Product Category"); 
+        public readonly static DynamicReadWriteDeleteAction Brand = new("Brand"); 
+        public readonly static DynamicReadWriteDeleteAction ProductCategory = new("Product Category"); 
     }
 }

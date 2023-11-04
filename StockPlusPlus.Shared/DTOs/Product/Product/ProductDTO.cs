@@ -8,7 +8,7 @@ namespace StockPlusPlus.Shared.DTOs.Product.Product;
 
 public class ProductDTO : ShiftEntityDTO
 {
-    [_ProductCategoryHashId]
+    [_ProductHashId]
     public override string? ID { get; set; }
     public string Name { get; set; } = default!;
 
