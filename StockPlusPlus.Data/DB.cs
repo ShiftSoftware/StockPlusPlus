@@ -5,7 +5,7 @@ using StockPlusPlus.Data.Entities.Product;
 
 namespace StockPlusPlus.Data;
 
-public class DB : ShiftIdentityDB
+public class DB : ShiftIdentityDbContext
 {
     public DB(DbContextOptions option) : base(option)
     {
