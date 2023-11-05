@@ -5,7 +5,7 @@ using StockPlusPlus.Shared.Enums.Product;
 
 namespace StockPlusPlus.Data.ReplicationModels;
 
-public class ProductModel : ShiftEntityDTO
+public class ProductModel : ShiftEntityViewAndUpsertDTO
 {
     public override string? ID { get; set; }
 

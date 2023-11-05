@@ -3,7 +3,7 @@ using ShiftSoftware.ShiftEntity.Model.Dtos;
 
 namespace StockPlusPlus.Shared.DTOs.Product.Brand;
 
-public class BrandDTO : ShiftEntityDTO
+public class BrandDTO : ShiftEntityViewAndUpsertDTO
 {
     public override string? ID { get; set; }
     public string Name { get; set; } = default!;

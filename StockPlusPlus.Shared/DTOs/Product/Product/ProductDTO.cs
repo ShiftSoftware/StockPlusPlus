@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace StockPlusPlus.Shared.DTOs.Product.Product;
 
-public class ProductDTO : ShiftEntityDTO
+public class ProductDTO : ShiftEntityViewAndUpsertDTO
 {
     [_ProductHashId]
     public override string? ID { get; set; }
