@@ -46,6 +46,20 @@
                                    TQuickAdd="StockPlusPlus.Shared.DTOs.Product.ProductCategory.ProductCategoryDTO"
                                    QuickAddComponentType="typeof(Pages.Product.ProductCategory.ProductCategoryForm)"
                                    QuickAddParameterName="@nameof(Pages.Product.ProductCategory.ProductCategoryForm.ProductCategoryName)" />
+
+
+    <ShiftAutocompleteWithQuickAdd Label="Country"
+                                   T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
+                                   @bind-Value="TheItem.CountryOfOrigin"
+                                   ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
+                                   EntitySet="Country"
+                                   TEntitySet="StockPlusPlus.Shared.DTOs.CountryDTO"
+                                   Where="@(q => x => x.Name!.Contains(q))"
+                                   DataValueField="@nameof(StockPlusPlus.Shared.DTOs.CountryDTO.ID)"
+                                   DataTextField="@nameof(StockPlusPlus.Shared.DTOs.CountryDTO.Name)"
+                                   TQuickAdd="StockPlusPlus.Shared.DTOs.CountryDTO"
+                                   QuickAddComponentType="typeof(Pages.Country.CountryForm)"
+                                   QuickAddParameterName="@nameof(Pages.Country.CountryForm.Name)" />
 </ShiftEntityForm>
 
 

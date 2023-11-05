@@ -11,6 +11,8 @@ public class StockActionTrees
     public readonly static ReadWriteDeleteAction ProductCategory = new("Product Category");
     public readonly static ReadWriteDeleteAction Product = new("Product");
 
+    public readonly static ReadWriteDeleteAction Country = new("Country");
+
     [ActionTree("Data Level Access", "Data Level or Row-Level Access")]
     public class DataLevelAccess
     {

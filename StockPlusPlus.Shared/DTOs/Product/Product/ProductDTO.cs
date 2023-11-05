@@ -20,4 +20,6 @@ public class ProductDTO : ShiftEntityViewAndUpsertDTO
 
     public ShiftEntitySelectDTO Brand { get; set; } = default!;
     public DateTimeOffset? ReleaseDate { get; set; }
+
+    public ShiftEntitySelectDTO? CountryOfOrigin { get; set; } = default!;
 }

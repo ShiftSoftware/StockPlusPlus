@@ -25,6 +25,7 @@ public class Product : Profile
             .ReverseMap()
             .ForMember(dest => dest.ProductCategory, opt => opt.Ignore())
             .ForMember(dest => dest.Brand, opt => opt.Ignore())
+            .ForMember(dest => dest.CountryOfOrigin, opt => opt.Ignore())
             .ForMember(
                     dest => dest.ProductCategoryID,
                     opt => opt.MapFrom(src => src.ProductCategory.Value.ToLong())
@@ -32,6 +33,10 @@ public class Product : Profile
             .ForMember(
                     dest => dest.BrandID,
                     opt => opt.MapFrom(src => src.Brand.Value.ToLong())
+                )
+            .ForMember(
+                    dest => dest.CountryOfOriginID,
+                    opt => opt.MapFrom(src => src.CountryOfOrigin == null ? new Nullable<long>() : src.CountryOfOrigin.Value.ToLong())
                 );
 
         CreateMap<Entities.Product.Product, ProductListDTO>()

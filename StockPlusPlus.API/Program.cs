@@ -16,6 +16,8 @@ using StockPlusPlus.Shared.DTOs.Product.ProductCategory;
 using StockPlusPlus.Shared.DTOs.Product.Brand;
 using StockPlusPlus.Shared.DTOs.Product.Product;
 using ShiftSoftware.ShiftEntity.Model;
+using StockPlusPlus.Data.Repositories;
+using StockPlusPlus.Shared.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -106,6 +108,7 @@ builder.Services
         x.OdataEntitySet<BrandListDTO>("Brand");
         x.OdataEntitySet<ProductCategoryListDTO>("ProductCategory");
         x.OdataEntitySet<ProductListDTO>("Product");
+        x.OdataEntitySet<CountryDTO>("Country");
         x.RegisterShiftIdentityDashboardEntitySets();
     });
 //.AddFakeIdentityEndPoints(
@@ -139,6 +142,7 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddScoped<BrandRepository>();
 builder.Services.AddScoped<ProductCategoryRepository>();
 builder.Services.AddScoped<ProductRepository>();
+builder.Services.AddScoped<CountryRepository>();
 
 builder.Services.AddTypeAuth((o) =>
 {

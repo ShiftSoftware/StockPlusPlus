@@ -62,7 +62,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestingTools", "TestingTool
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftFrameworkTestingTools", "..\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj", "{2913C2C6-A96C-428F-8548-1CE9FE8E80B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StockPlusPlus.Functions", "StockPlusPlus.Functions\StockPlusPlus.Functions.csproj", "{D781393E-1509-4ABC-BEA2-404A3F829548}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Functions", "StockPlusPlus.Functions\StockPlusPlus.Functions.csproj", "{D781393E-1509-4ABC-BEA2-404A3F829548}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
