@@ -39,6 +39,8 @@ public class BrandController : ShiftEntitySecureControllerAsync<BrandRepository,
             userId: null
         );
 
+        this.brandRepository.Add(createdBrand);
+
         await this.brandRepository.SaveChangesAsync();
 
         return Ok(await this.brandRepository.ViewAsync(createdBrand!));
