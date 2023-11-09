@@ -10,7 +10,7 @@
            Title="Product List"
            T="ProductListDTO"
            Dense
-            Where="Where"
+            DefaultFilters="DefaultFilters"
             ComponentType="typeof(ProductForm)"
             ShowIDColumn="true"
             TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
@@ -48,7 +48,7 @@
     [SupplyParameterFromQuery]
     public string? BrandID { get; set; }
 
-    public Expression<Func<ProductListDTO, bool>> Where = x => true;
+    public List<string> DefaultFilters = new();
 
     protected override void OnInitialized()
     {
@@ -58,14 +58,14 @@
         {
             AddDialogParameters[nameof(ProductForm.ProductCategoryID)] = ProductCategoryID;
 
-            Where = Where.AndAlso(x => x.ProductCategoryID == ProductCategoryID);
+            DefaultFilters.Add($"{nameof(ProductListDTO.ProductCategoryID)} eq {ProductCategoryID}");
         }
 
         if (!string.IsNullOrWhiteSpace(BrandID))
         {
             AddDialogParameters[nameof(ProductForm.BrandID)] = BrandID;
 
-            Where = Where.AndAlso(x => x.BrandID == BrandID);
+            DefaultFilters.Add($"{nameof(ProductListDTO.BrandID)} eq {BrandID}");
         }
     }
 }
