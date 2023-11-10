@@ -14,9 +14,9 @@
            EnableExport>
     <ButtonColumn Property="x => x.Name" Title="Name" />
 
-    <TemplateColumn Title="Tracking Method">
+    <PropertyColumn Title="Tracking Method" Property="x=> x.TrackingMethod">
         <CellTemplate>
             <span>@context.Item!.TrackingMethod!.Describe()</span>
         </CellTemplate>
-    </TemplateColumn>
+    </PropertyColumn>
 </ShiftList>
