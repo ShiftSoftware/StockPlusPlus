@@ -5,7 +5,8 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<AzureFunctionsVersion>v4</AzureFunctionsVersion>
 		<!--<_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>-->
-	</PropertyGroup>
+	  <UserSecretsId>1fad2a95-8f41-4ec1-bbd2-f40a3c3f86ac</UserSecretsId>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<!--Functions Runtime contain a version of System.Text.Json. The ShiftEntity.Model contains a newer version.
@@ -26,6 +27,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.CosmosDbReplication\ShiftEntity.CosmosDbReplication.csproj" />
 		<ProjectReference Include="..\StockPlusPlus.Data\StockPlusPlus.Data.csproj" />
 		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
 	</ItemGroup>

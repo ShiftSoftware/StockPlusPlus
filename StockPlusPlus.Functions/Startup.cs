@@ -22,8 +22,8 @@ public class Startup : FunctionsStartup
             x.HashId.RegisterHashId(false);
 
             x.AddAutoMapper(typeof(ShiftSoftware.ShiftEntity.EFCore.AutoMapperProfiles.DefaultMappings).Assembly);
-
             x.AddAutoMapper(typeof(StockPlusPlus.Data.Marker).Assembly);
+            x.AddAutoMapper(typeof(ShiftSoftware.ShiftIdentity.Data.Marker).Assembly);
 
         })
             .RegisterShiftEntityEfCoreTriggers()
@@ -31,6 +31,8 @@ public class Startup : FunctionsStartup
             .AddScoped<ProductCategoryRepository>()
             .AddScoped<BrandRepository>()
             .AddScoped<ProductRepository>();
+
+        builder.Services.AddShiftEntityCosmosDbReplicationFunction();
     }
     public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)
     {
