@@ -8,7 +8,7 @@ namespace StockPlusPlus.Data.Repositories.Product;
 
 public class ProductCategoryRepository : ShiftRepository<DB, ProductCategory, ProductCategoryListDTO, ProductCategoryDTO>
 {
-    public ProductCategoryRepository(DB db, IMapper mapper) : base(db, mapper)
+    public ProductCategoryRepository(DB db, IMapper mapper) : base(db)
     {
     }
 }
