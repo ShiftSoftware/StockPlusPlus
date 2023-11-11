@@ -6,7 +6,7 @@ namespace StockPlusPlus.Data.Repositories;
 
 public class CountryRepository : ShiftRepository<DB, Country, CountryDTO, CountryDTO>
 {
-    public CountryRepository(DB db, AutoMapper.IMapper mapper) : base(db, db.Countries, mapper)
+    public CountryRepository(DB db, AutoMapper.IMapper mapper) : base(db, mapper)
     {
 
     }

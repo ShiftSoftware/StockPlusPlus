@@ -8,7 +8,7 @@ namespace StockPlusPlus.Data.Repositories.Product;
 
 public class BrandRepository : ShiftRepository<DB, Entities.Product.Brand, BrandListDTO, BrandDTO>
 {
-    public BrandRepository(DB db, IMapper mapper) : base(db, db.Brands, mapper)
+    public BrandRepository(DB db, IMapper mapper) : base(db, mapper)
     {
     }
 
