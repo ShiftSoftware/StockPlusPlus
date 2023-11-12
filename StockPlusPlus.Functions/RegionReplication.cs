@@ -13,19 +13,23 @@ using StockPlusPlus.Data.Entities.Product;
 using ShiftSoftware.ShiftIdentity.Core.Entities;
 using Microsoft.Extensions.Configuration;
 using ShiftSoftware.ShiftIdentity.Core.ReplicationModels;
+using AutoMapper;
 
 namespace StockPlusPlus.Functions
 {
     public class RegionReplication
     {
-        private readonly CosmosDbReplication replication;
+        private readonly CosmosDBReplication replication;
         private readonly IConfiguration config;
+        private readonly IMapper mapper;
 
-        public RegionReplication(CosmosDbReplication replication,
-            IConfiguration config)
+        public RegionReplication(CosmosDBReplication replication,
+            IConfiguration config,
+            IMapper mapper)
         {
             this.replication = replication;
             this.config = config;
+            this.mapper = mapper;
         }
 
         [FunctionName("RegionReplication")]
@@ -37,7 +41,7 @@ namespace StockPlusPlus.Functions
             var databaseId = config.GetValue<string>("CosmosDb:DefaultDatabaseName");
 
             await replication.SetUp<DB, Region>(connectionString, databaseId)
-                .Replicate<RegionModel>("Regions")
+                .Replicate<RegionModel>("Regions", x => this.mapper.Map<RegionModel>(x))
                 .RunAsync();
 
             return new OkObjectResult("Success");
