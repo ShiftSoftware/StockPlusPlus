@@ -47,13 +47,13 @@ public class Test
         var connectionString = config.GetValue<string>("CosmosDb:ConnectionString");
         var databaseId = config.GetValue<string>("CosmosDb:DefaultDatabaseName");
 
-        //await replication.SetUp<DB, Region>(connectionString, databaseId)
-        //    .Replicate<RegionModel>("Regions", x => this.mapper.Map<RegionModel>(x))
-        //    .RunAsync();
-
-        await replication.SetUp<DB, CompanyBranch>(connectionString, databaseId, q => q.Include(x => x.Region).Include(x => x.Company))
-            .Replicate<CompanyBranchModel>("CompanyBranches")
+        await replication.SetUp<DB, Region>(connectionString, databaseId)
+            .Replicate<RegionModel>("Regions", x => this.mapper.Map<RegionModel>(x))
             .RunAsync();
+
+        //await replication.SetUp<DB, CompanyBranch>(connectionString, databaseId, q => q.Include(x => x.Region).Include(x => x.Company))
+        //    .Replicate<CompanyBranchModel>("CompanyBranches")
+        //    .RunAsync();
 
         //var braches = await this.db.CompanyBranches
         //    .ProjectTo<CompanyBranchModel>(this.mapper.ConfigurationProvider)
