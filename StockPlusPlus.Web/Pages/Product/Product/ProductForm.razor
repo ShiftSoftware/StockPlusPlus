@@ -33,7 +33,7 @@
                                    T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
                                    @bind-Value="TheItem.Brand"
                                    TEntitySet="BrandListDTO"
-                                   ODataParameters="@(odataQuery.CreateODataParameterObject<BrandListDTO>("Brand", "ID", "Name"))"
+                                   EntitySet="Brand"
                                    TQuickAdd="BrandDTO"
                                    QuickAddComponentType="typeof(BrandForm)"
                                    QuickAddParameterName="@nameof(BrandForm.BrandName)" />
@@ -42,7 +42,7 @@
                                    T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
                                    @bind-Value="TheItem.ProductCategory"
                                    TEntitySet="ProductCategoryListDTO"
-                                   ODataParameters="@(odataQuery.CreateODataParameterObject<ProductCategoryListDTO>("ProductCategory", "ID", "Name"))"
+                                   EntitySet="ProductCategory"
                                    TQuickAdd="ProductCategoryDTO"
                                    QuickAddComponentType="typeof(ProductCategoryForm)"
                                    QuickAddParameterName="@nameof(ProductCategoryForm.ProductCategoryName)" />
@@ -51,9 +51,8 @@
     <ShiftAutocompleteWithQuickAdd Label="Country"
                                    T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
                                    @bind-Value="TheItem.CountryOfOrigin"
-                                   ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
                                    TEntitySet="CountryDTO"
-                                   ODataParameters="@(odataQuery.CreateODataParameterObject<CountryDTO>("Country", "ID", "Name"))"
+                                   EntitySet="Country"
                                    TQuickAdd="StockPlusPlus.Shared.DTOs.CountryDTO"
                                    QuickAddComponentType="typeof(CountryForm)"
                                    QuickAddParameterName="@nameof(CountryForm.Name)" />
