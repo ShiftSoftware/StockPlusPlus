@@ -60,14 +60,21 @@ public class Repositories
 
         await productRepository.SaveChangesAsync();
 
-        var viewedProduct = await productRepository.ViewAsync(product);
+        this.productRepository.db.ChangeTracker.Clear();
+
+        var foundProduct = (await this.productRepository.FindAsync(product.ID))!;
+
+        var viewedProduct = await productRepository.ViewAsync(foundProduct);
 
         Assert.NotNull(viewedProduct);
 
-        Assert.Equal(product.Name, viewedProduct.Name); 
+        Assert.Equal(foundProduct.Name, viewedProduct.Name); 
 
-        Assert.Equal(product.Brand.Name, brand.Name);
+        Assert.Equal(foundProduct.Brand!.Name, brand.Name);
 
-        Assert.Equal(product.ProductCategory.Name, productCategory.Name);
+        //Product Repository does not include the product category
+        Assert.Null(foundProduct.ProductCategory);
+
+        Assert.Equal(foundProduct.ProductCategoryID, productCategory.ID);
     }
 }

@@ -66,14 +66,14 @@
         {
             AddDialogParameters[nameof(ProductForm.ProductCategoryID)] = ProductCategoryID;
 
-            DefaultFilters.Add($"{nameof(ProductListDTO.ProductCategoryID)} eq {ProductCategoryID}");
+            DefaultFilters.Add($"{nameof(ProductListDTO.ProductCategoryID)} eq '{ProductCategoryID}'");
         }
 
         if (!string.IsNullOrWhiteSpace(BrandID))
         {
             AddDialogParameters[nameof(ProductForm.BrandID)] = BrandID;
 
-            DefaultFilters.Add($"{nameof(ProductListDTO.BrandID)} eq {BrandID}");
+            DefaultFilters.Add($"{nameof(ProductListDTO.BrandID)} eq '{BrandID}'");
         }
     }
 }

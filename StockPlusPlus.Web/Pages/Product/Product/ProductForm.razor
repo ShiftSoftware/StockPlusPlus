@@ -1,8 +1,16 @@
 ﻿@attribute [Route($"/{nameof(ProductForm)}/{{Key?}}")]
 
 @using StockPlusPlus.Shared.DTOs.Product.Product
+@using StockPlusPlus.Shared.DTOs.Product.Brand
+@using StockPlusPlus.Shared.DTOs.Product.ProductCategory
+@using StockPlusPlus.Shared.DTOs
+
+@using Pages.Product.Brand
+@using Pages.Product.ProductCategory
+@using Pages.Country
 
 @inherits ShiftForm<ProductForm, ProductDTO>
+@inject ODataQuery odataQuery
 
 <ShiftEntityForm @bind-Mode="Mode"
                  @bind-Value="TheItem"
@@ -24,42 +32,31 @@
     <ShiftAutocompleteWithQuickAdd Label="Brand"
                                    T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
                                    @bind-Value="TheItem.Brand"
-                                   ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
-                                   EntitySet="Brand"
-                                   TEntitySet="StockPlusPlus.Shared.DTOs.Product.Brand.BrandListDTO"
-                                   Where="@(q => x => x.Name!.Contains(q))"
-                                   DataValueField="@nameof(StockPlusPlus.Shared.DTOs.Product.Brand.BrandListDTO.ID)"
-                                   DataTextField="@nameof(StockPlusPlus.Shared.DTOs.Product.Brand.BrandListDTO.Name)"
-                                   TQuickAdd="StockPlusPlus.Shared.DTOs.Product.Brand.BrandDTO"
-                                   QuickAddComponentType="typeof(Pages.Product.Brand.BrandForm)"
-                                   QuickAddParameterName="@nameof(Pages.Product.Brand.BrandForm.BrandName)" />
+                                   TEntitySet="BrandListDTO"
+                                   ODataParameters="@(odataQuery.CreateODataParameterObject<BrandListDTO>("Brand", "ID", "Name"))"
+                                   TQuickAdd="BrandDTO"
+                                   QuickAddComponentType="typeof(BrandForm)"
+                                   QuickAddParameterName="@nameof(BrandForm.BrandName)" />
 
     <ShiftAutocompleteWithQuickAdd Label="ProductCategory"
                                    T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
                                    @bind-Value="TheItem.ProductCategory"
-                                   ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
-                                   EntitySet="ProductCategory"
-                                   TEntitySet="StockPlusPlus.Shared.DTOs.Product.ProductCategory.ProductCategoryListDTO"
-                                   Where="@(q => x => x.Name!.Contains(q))"
-                                   DataValueField="@nameof(StockPlusPlus.Shared.DTOs.Product.ProductCategory.ProductCategoryListDTO.ID)"
-                                   DataTextField="@nameof(StockPlusPlus.Shared.DTOs.Product.ProductCategory.ProductCategoryListDTO.Name)"
-                                   TQuickAdd="StockPlusPlus.Shared.DTOs.Product.ProductCategory.ProductCategoryDTO"
-                                   QuickAddComponentType="typeof(Pages.Product.ProductCategory.ProductCategoryForm)"
-                                   QuickAddParameterName="@nameof(Pages.Product.ProductCategory.ProductCategoryForm.ProductCategoryName)" />
+                                   TEntitySet="ProductCategoryListDTO"
+                                   ODataParameters="@(odataQuery.CreateODataParameterObject<ProductCategoryListDTO>("ProductCategory", "ID", "Name"))"
+                                   TQuickAdd="ProductCategoryDTO"
+                                   QuickAddComponentType="typeof(ProductCategoryForm)"
+                                   QuickAddParameterName="@nameof(ProductCategoryForm.ProductCategoryName)" />
 
 
     <ShiftAutocompleteWithQuickAdd Label="Country"
                                    T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
                                    @bind-Value="TheItem.CountryOfOrigin"
                                    ToStringFunc="@(e=> e==null ? null : $"{e.Text}")"
-                                   EntitySet="Country"
-                                   TEntitySet="StockPlusPlus.Shared.DTOs.CountryDTO"
-                                   Where="@(q => x => x.Name!.Contains(q))"
-                                   DataValueField="@nameof(StockPlusPlus.Shared.DTOs.CountryDTO.ID)"
-                                   DataTextField="@nameof(StockPlusPlus.Shared.DTOs.CountryDTO.Name)"
+                                   TEntitySet="CountryDTO"
+                                   ODataParameters="@(odataQuery.CreateODataParameterObject<CountryDTO>("Country", "ID", "Name"))"
                                    TQuickAdd="StockPlusPlus.Shared.DTOs.CountryDTO"
-                                   QuickAddComponentType="typeof(Pages.Country.CountryForm)"
-                                   QuickAddParameterName="@nameof(Pages.Country.CountryForm.Name)" />
+                                   QuickAddComponentType="typeof(CountryForm)"
+                                   QuickAddParameterName="@nameof(CountryForm.Name)" />
 </ShiftEntityForm>
 
 
