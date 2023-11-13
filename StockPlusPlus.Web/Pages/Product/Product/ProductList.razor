@@ -1,8 +1,10 @@
 ﻿@attribute [Authorize]
 @attribute [Route($"/{nameof(ProductList)}")]
 
+@using StockPlusPlus.Shared.DTOs.Product.Brand;
 @using StockPlusPlus.Shared.DTOs.Product.Product
 @using System.Linq.Expressions;
+@using StockPlusPlus.Shared.DTOs.Product.ProductCategory;
 @using StockPlusPlus.Web.Pages.Product.Brand;
 @using StockPlusPlus.Web.Pages.Product.ProductCategory;
 
@@ -10,11 +12,11 @@
            Title="Product List"
            T="ProductListDTO"
            Dense
-            DefaultFilters="DefaultFilters"
-            ComponentType="typeof(ProductForm)"
-            ShowIDColumn="true"
-            TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
-            AddDialogParameters="AddDialogParameters"
+           DefaultFilters="DefaultFilters"
+           ComponentType="typeof(ProductForm)"
+           ShowIDColumn="true"
+           TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
+           AddDialogParameters="AddDialogParameters"
            EnableExport>
     <PropertyColumn Property="x => x.Name" Title="Name" />
     <PropertyColumn Format="F" Property="x => x.LastSaveDate.DateTime" Title="SaveDate" />
@@ -33,7 +35,13 @@
             <MudChip Style="cursor: pointer;" Icon="@Icons.Material.Filled.BrandingWatermark" Variant="Variant.Outlined">@context</MudChip>
         </ButtonTemplate>
     </ButtonColumn>
-    <ButtonColumn ComponentType="typeof(ProductCategoryForm)" KeyPropertyName="@nameof(ProductListDTO.ProductCategoryID)" OpenMode="ModalOpenMode.NewTab" Property="x => x.Category" Title="Category" />
+    <ForeignColumn IsButtonColumn
+                    ComponentType="typeof(ProductCategoryForm)"
+                    Property="x => x.ProductCategoryID"
+                    Title="Category"
+                    EntitySetName="ProductCategory"
+                    OpenMode="ModalOpenMode.NewTab"
+                    Test="new ProductCategoryListDTO()" />
 </ShiftList>
 
 @code {
