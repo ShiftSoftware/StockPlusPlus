@@ -30,7 +30,6 @@
                          @bind-DateTimeOffset="TheItem.ReleaseDate" />
 
     <ShiftAutocompleteWithQuickAdd Label="Brand"
-                                   T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
                                    @bind-Value="TheItem.Brand"
                                    TEntitySet="BrandListDTO"
                                    EntitySet="Brand"
@@ -39,7 +38,6 @@
                                    QuickAddParameterName="@nameof(BrandForm.BrandName)" />
 
     <ShiftAutocompleteWithQuickAdd Label="ProductCategory"
-                                   T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
                                    @bind-Value="TheItem.ProductCategory"
                                    TEntitySet="ProductCategoryListDTO"
                                    EntitySet="ProductCategory"
@@ -49,7 +47,6 @@
 
 
     <ShiftAutocompleteWithQuickAdd Label="Country"
-                                   T="ShiftSoftware.ShiftEntity.Model.Dtos.ShiftEntitySelectDTO"
                                    @bind-Value="TheItem.CountryOfOrigin"
                                    TEntitySet="CountryDTO"
                                    EntitySet="Country"
