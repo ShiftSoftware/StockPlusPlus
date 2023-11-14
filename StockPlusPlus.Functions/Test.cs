@@ -47,13 +47,18 @@ public class Test
         var connectionString = config.GetValue<string>("CosmosDb:ConnectionString");
         var databaseId = config.GetValue<string>("CosmosDb:DefaultDatabaseName");
 
-        await replication.SetUp<DB, Region>(connectionString, databaseId)
-            .Replicate<RegionModel>("Regions", x => this.mapper.Map<RegionModel>(x))
+        //await replication.SetUp<DB, Region>(connectionString, databaseId)
+        //    .Replicate<RegionModel>("Regions", x => this.mapper.Map<RegionModel>(x))
+        //    .RunAsync();
+
+        await replication.SetUp<DB, CompanyBranch>(connectionString, databaseId, q => q.Include(x => x.Region).Include(x => x.Company))
+            .Replicate("CompanyBranches", x => this.mapper.Map<CompanyBranchModel>(x))
             .RunAsync();
 
-        //await replication.SetUp<DB, CompanyBranch>(connectionString, databaseId, q => q.Include(x => x.Region).Include(x => x.Company))
-        //    .Replicate<CompanyBranchModel>("CompanyBranches")
-        //    .RunAsync();
+        await replication.SetUp<DB, Company>(connectionString, databaseId)
+            .Replicate("Companies", x => this.mapper.Map<CompanyModel>(x))
+            .UpdatePropertyReference<CompanyModel, CompanyBranch>("CompanyBranches", x => x.Company)
+            .RunAsync();
 
         //var braches = await this.db.CompanyBranches
         //    .ProjectTo<CompanyBranchModel>(this.mapper.ConfigurationProvider)
