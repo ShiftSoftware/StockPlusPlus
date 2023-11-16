@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using ShiftSoftware.ShiftEntity.Core;
+﻿
 using ShiftSoftware.ShiftEntity.EFCore;
 using StockPlusPlus.Data.Entities.Product;
 using StockPlusPlus.Shared.DTOs.Product.Brand;
@@ -8,7 +7,7 @@ namespace StockPlusPlus.Data.Repositories.Product;
 
 public class BrandRepository : ShiftRepository<DB, Entities.Product.Brand, BrandListDTO, BrandDTO>
 {
-    public BrandRepository(DB db, IMapper mapper) : base(db)
+    public BrandRepository(DB db) : base(db)
     {
     }
 
