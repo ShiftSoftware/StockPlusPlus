@@ -60,8 +60,8 @@ public class Test
             .UpdateReference<CompanyBranchServiceModel>("CompanyBranches",
             (q, e) =>
             {
-                var ids = e.Select(s => s.ID.ToString());
-                return q.Where(x => x.ItemType == "Service" && ids.Contains(x.id));
+                var id = e.ID.ToString();
+                return q.Where(x => x.ItemType == "Service" && x.id == id);
             })
             .RunAsync();
 
