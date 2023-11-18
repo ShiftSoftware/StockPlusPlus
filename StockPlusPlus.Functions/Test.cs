@@ -55,10 +55,24 @@ public class Test
             .Replicate("CompanyBranches", x => this.mapper.Map<CompanyBranchModel>(x))
             .RunAsync();
 
-        await replication.SetUp<DB, Company>(connectionString, databaseId)
-            .Replicate("Companies", x => this.mapper.Map<CompanyModel>(x))
-            .UpdatePropertyReference<CompanyModel, CompanyBranch>("CompanyBranches", x => x.Company)
+        await replication.SetUp<DB, Service>(connectionString, databaseId)
+            .Replicate("Services", x => this.mapper.Map<ServiceModel>(x))
+            .UpdateReference<CompanyBranchServiceModel>("CompanyBranches",
+            (q, e) =>
+            {
+                var ids = e.Select(s => s.ID.ToString());
+                return q.Where(x => x.ItemType == "Service" && ids.Contains(x.id));
+            })
             .RunAsync();
+
+        await replication.SetUp<DB, CompanyBranchService>(connectionString, databaseId, x=> x.Include(i=> i.Service))
+            .Replicate("CompanyBranches", x => this.mapper.Map<CompanyBranchServiceModel>(x))
+            .RunAsync();
+
+        //await replication.SetUp<DB, Company>(connectionString, databaseId)
+        //    .Replicate("Companies", x => this.mapper.Map<CompanyModel>(x))
+        //    .UpdatePropertyReference<CompanyModel, CompanyBranch>("CompanyBranches", x => x.Company)
+        //    .RunAsync();
 
         //var braches = await this.db.CompanyBranches
         //    .ProjectTo<CompanyBranchModel>(this.mapper.ConfigurationProvider)
