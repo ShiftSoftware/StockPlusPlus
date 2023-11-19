@@ -62,7 +62,8 @@ public class Test
             {
                 var id = e.ID.ToString();
                 return q.Where(x => x.ItemType == "Service" && x.id == id);
-            })
+            },
+            (q, r) => q.Where(x => x.id == r.RowID.ToString() && x.ItemType == "Service"))
             .RunAsync();
 
         await replication.SetUp<DB, CompanyBranchService>(connectionString, databaseId, x=> x.Include(i=> i.Service))
