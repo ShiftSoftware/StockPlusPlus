@@ -39,6 +39,7 @@ builder.Services.AddShiftBlazor(config =>
         options.UserListEndpoint = baseUrl.AddUrlPath("odata/IdentityPublicUser");
         options.AdditionalAssemblies = new[] { typeof(ShiftSoftware.ShiftIdentity.Dashboard.Blazor.ShiftIdentityDashboarBlazorMaker).Assembly };
         options.AddLanguage("en-US", "English")
+               .AddLanguage("ar-IQ", "Arabic", true)
                .AddLanguage("en-US", "English RTL", true);
     };
     //config.SyncfusionLicense = builder.Configuration.GetValue<string>("SyncfusionLicense");
