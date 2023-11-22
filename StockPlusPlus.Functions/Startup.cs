@@ -32,7 +32,7 @@ public class Startup : FunctionsStartup
             .AddScoped<BrandRepository>()
             .AddScoped<ProductRepository>();
 
-        builder.Services.AddShiftEntityCosmosDbReplicationFunction();
+        builder.Services.AddShiftEntityCosmosDbReplication();
     }
     public override void ConfigureAppConfiguration(IFunctionsConfigurationBuilder builder)
     {

@@ -11,6 +11,13 @@ using Microsoft.Extensions.Azure;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using StockPlusPlus.Data.Repositories.Product;
+using StockPlusPlus.Shared.DTOs.Product.ProductCategory;
+using StockPlusPlus.Shared.DTOs.Product.Brand;
+using StockPlusPlus.Shared.DTOs.Product.Product;
+using ShiftSoftware.ShiftEntity.Model;
+using StockPlusPlus.Data.Repositories;
+using StockPlusPlus.Shared.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,7 +36,7 @@ Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
 
 if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
 {
-    builder.Services.AddShiftEntityCosmosDbReplication(x =>
+    builder.Services.AddShiftEntityCosmosDbReplicationTrigger(x =>
     {
         //x.ConnectionString = builder.Configuration.GetValue<string>("CosmosDb:ConnectionString");
         //x.DefaultDatabaseName = builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName");
@@ -42,7 +49,6 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
 }
 
 builder.Services
-    .RegisterShiftRepositories(typeof(StockPlusPlus.Data.Marker).Assembly)
     .AddLocalization()
     .AddHttpContextAccessor()
     .AddDbContext<DB>(dbOptionBuilder)
@@ -99,7 +105,10 @@ builder.Services
     .AddShiftEntityOdata(x =>
     {
         x.DefaultOptions();
-        x.RegisterAllDTOs(typeof(StockPlusPlus.Shared.Marker).Assembly);
+        x.OdataEntitySet<BrandListDTO>("Brand");
+        x.OdataEntitySet<ProductCategoryListDTO>("ProductCategory");
+        x.OdataEntitySet<ProductListDTO>("Product");
+        x.OdataEntitySet<CountryDTO>("Country");
         x.RegisterShiftIdentityDashboardEntitySets();
     });
 //.AddFakeIdentityEndPoints(
@@ -129,6 +138,11 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.DocInclusionPredicate(SwaggerService.DocInclusionPredicate);
 });
+
+builder.Services.AddScoped<BrandRepository>();
+builder.Services.AddScoped<ProductCategoryRepository>();
+builder.Services.AddScoped<ProductRepository>();
+builder.Services.AddScoped<CountryRepository>();
 
 builder.Services.AddTypeAuth((o) =>
 {
