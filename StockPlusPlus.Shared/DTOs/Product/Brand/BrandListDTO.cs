@@ -1,6 +1,8 @@
 ﻿
 using ShiftSoftware.ShiftEntity.Core;
+using ShiftSoftware.ShiftEntity.Model;
 using ShiftSoftware.ShiftEntity.Model.Dtos;
+using System.Text.Json.Serialization;
 
 namespace StockPlusPlus.Shared.DTOs.Product.Brand;
 
@@ -8,6 +10,8 @@ namespace StockPlusPlus.Shared.DTOs.Product.Brand;
 public class BrandListDTO : ShiftEntityListDTO
 {
     public override string? ID { get; set; }
+
+    [JsonConverter(typeof(LocalizedTextJsonConverter))]
     public string Name { get; set; } = default!;
     public string? Description { get; set; }
     public string? Code { get; set; }
