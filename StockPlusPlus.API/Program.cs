@@ -49,6 +49,7 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
 }
 
 builder.Services
+    .RegisterShiftRepositories(typeof(StockPlusPlus.Data.Marker).Assembly)
     .AddLocalization()
     .AddHttpContextAccessor()
     .AddDbContext<DB>(dbOptionBuilder)
@@ -105,10 +106,7 @@ builder.Services
     .AddShiftEntityOdata(x =>
     {
         x.DefaultOptions();
-        x.OdataEntitySet<BrandListDTO>("Brand");
-        x.OdataEntitySet<ProductCategoryListDTO>("ProductCategory");
-        x.OdataEntitySet<ProductListDTO>("Product");
-        x.OdataEntitySet<CountryDTO>("Country");
+        x.RegisterAllDTOs(typeof(StockPlusPlus.Shared.Marker).Assembly);
         x.RegisterShiftIdentityDashboardEntitySets();
     });
 //.AddFakeIdentityEndPoints(
@@ -138,11 +136,6 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.DocInclusionPredicate(SwaggerService.DocInclusionPredicate);
 });
-
-builder.Services.AddScoped<BrandRepository>();
-builder.Services.AddScoped<ProductCategoryRepository>();
-builder.Services.AddScoped<ProductRepository>();
-builder.Services.AddScoped<CountryRepository>();
 
 builder.Services.AddTypeAuth((o) =>
 {
