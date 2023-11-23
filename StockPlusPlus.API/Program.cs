@@ -41,7 +41,6 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
         //x.ConnectionString = builder.Configuration.GetValue<string>("CosmosDb:ConnectionString");
         //x.DefaultDatabaseName = builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName");
         x.AddShiftDbContext<DB>(dbOptionBuilder);
-        x.RepositoriesAssembly= typeof(DB).Assembly;
 
         //x.Accounts.Add(new CosmosDBAccount(builder.Configuration.GetValue<string>("CosmosDb:ConnectionString")!,
         //    "Identity", false, builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName")));
@@ -69,7 +68,6 @@ builder.Services
         x.AddAzureStorage(azureStorageAccounts.ToArray());
 
         x.AddShiftIdentityAutoMapper();
-        x.RepositoriesAssembly = typeof(StockPlusPlus.Data.Marker).Assembly;
     })
     .AddShiftIdentity(builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!, builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!)
     .AddShiftIdentityDashboard<DB>(
