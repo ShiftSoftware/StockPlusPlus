@@ -2,7 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Models;
 using ShiftSoftware.ShiftIdentity.AspNetCore;
 using ShiftSoftware.ShiftIdentity.Core;
-using ShiftSoftware.ShiftIdentity.Core.DTOs;
 using StockPlusPlus.Data;
 using ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore.Extentsions;
 using ShiftSoftware.ShiftIdentity.AspNetCore.Extensions;
@@ -11,28 +10,18 @@ using Microsoft.Extensions.Azure;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
-using StockPlusPlus.Data.Repositories.Product;
-using StockPlusPlus.Shared.DTOs.Product.ProductCategory;
-using StockPlusPlus.Shared.DTOs.Product.Brand;
-using StockPlusPlus.Shared.DTOs.Product.Product;
-using ShiftSoftware.ShiftEntity.Model;
-using StockPlusPlus.Data.Repositories;
-using StockPlusPlus.Shared.DTOs;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var fakeUser = new TokenUserDataDTO
-{
-    FullName = "Fake User",
-    ID = "1",
-    Username = "fake-user"
-};
 
 Action<DbContextOptionsBuilder> dbOptionBuilder = x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("SQLServer")!)
     .UseTemporal(true);
 };
+
+builder.Services.RegisterShiftRepositories(typeof(StockPlusPlus.Data.Marker).Assembly);
+
+builder.Services.AddDbContext<DB>(dbOptionBuilder);
 
 if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
 {
@@ -47,89 +36,69 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
     });
 }
 
-builder.Services
-    .RegisterShiftRepositories(typeof(StockPlusPlus.Data.Marker).Assembly)
+var mvcBuilder = builder.Services
     .AddLocalization()
     .AddHttpContextAccessor()
-    .AddDbContext<DB>(dbOptionBuilder)
-    .AddControllers()
-    .AddShiftEntityWeb(x =>
+    .AddControllers();
+
+mvcBuilder.AddShiftEntityWeb(x =>
+{
+    x.WrapValidationErrorResponseWithShiftEntityResponse(true);
+    x.AddAutoMapper(typeof(StockPlusPlus.Data.Marker).Assembly);
+
+    x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
+    x.HashId.RegisterIdentityHashId("one-two", 5);
+
+    var azureStorageAccounts = new List<ShiftSoftware.ShiftEntity.Core.Services.AzureStorageOption>();
+
+    builder.Configuration.Bind("AzureStorageAccounts", azureStorageAccounts);
+
+    x.AddAzureStorage(azureStorageAccounts.ToArray());
+
+    x.AddShiftIdentityAutoMapper();
+});
+
+mvcBuilder.AddShiftIdentity(builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!, builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!);
+
+mvcBuilder.AddShiftIdentityDashboard<DB>(
+    new ShiftIdentityConfiguration
     {
-        x.WrapValidationErrorResponseWithShiftEntityResponse(true);
-        x.AddAutoMapper(typeof(StockPlusPlus.Data.Marker).Assembly);
-
-        x.HashId.RegisterHashId(builder.Configuration.GetValue<bool>("Settings:HashIdSettings:AcceptUnencodedIds"));
-        x.HashId.RegisterIdentityHashId("one-two", 5);
-
-        var azureStorageAccounts = new List<ShiftSoftware.ShiftEntity.Core.Services.AzureStorageOption>();
-
-        builder.Configuration.Bind("AzureStorageAccounts", azureStorageAccounts);
-
-        x.AddAzureStorage(azureStorageAccounts.ToArray());
-
-        x.AddShiftIdentityAutoMapper();
-    })
-    .AddShiftIdentity(builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!, builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!)
-    .AddShiftIdentityDashboard<DB>(
-        new ShiftIdentityConfiguration
+        ShiftIdentityHostingType = ShiftIdentityHostingTypes.Internal,
+        Token = new TokenSettingsModel
         {
-            ShiftIdentityHostingType = ShiftIdentityHostingTypes.Internal,
-            Token = new TokenSettingsModel
-            {
-                ExpireSeconds = 60000,
-                Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
-                Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
-            },
-            Security = new SecuritySettingsModel
-            {
-                LockDownInMinutes = 0,
-                LoginAttemptsForLockDown = 1000000,
-                RequirePasswordChange = false
-            },
-            RefreshToken = new TokenSettingsModel
-            {
-                Audience = "stock-plus-plus",
-                ExpireSeconds = 60000000,
-                Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
-                Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
-            },
-            HashIdSettings = new HashIdSettings
-            {
-                AcceptUnencodedIds = true,
-                UserIdsSalt = "k02iUHSb2ier9fiui02349AbfJEI",
-                UserIdsMinHashLength = 5
-            },
-        }
-    )
-    .AddShiftEntityOdata(x =>
-    {
-        x.DefaultOptions();
-        x.RegisterAllDTOs(typeof(StockPlusPlus.Shared.Marker).Assembly);
-        x.RegisterShiftIdentityDashboardEntitySets();
-    });
-//.AddFakeIdentityEndPoints(
-//    new TokenSettingsModel
-//    {
-//        Issuer = "ToDo",
-//        Key = "one-two-three-four-five-six-seven-eight.one-two-three-four-five-six-seven-eight",
-//        ExpireSeconds = 60
-//    },
-//    fakeUser,
-//    new ShiftSoftware.ShiftIdentity.Core.DTOs.App.AppDTO
-//    {
-//        AppId = "to-do-dev",
-//        DisplayName = "ToDo Dev",
-//        RedirectUri = "http://localhost:5028/Auth/Token"
-//    },
-//    "123a",
-//    new string[] {
-//        """
-//            {
-//                "ToDoActions": [1,2,3,4]
-//            }
-//        """
-//    }
-//);
+            ExpireSeconds = 60000,
+            Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
+            Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
+        },
+        Security = new SecuritySettingsModel
+        {
+            LockDownInMinutes = 0,
+            LoginAttemptsForLockDown = 1000000,
+            RequirePasswordChange = false
+        },
+        RefreshToken = new TokenSettingsModel
+        {
+            Audience = "stock-plus-plus",
+            ExpireSeconds = 60000000,
+            Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
+            Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
+        },
+        HashIdSettings = new HashIdSettings
+        {
+            AcceptUnencodedIds = true,
+            UserIdsSalt = "k02iUHSb2ier9fiui02349AbfJEI",
+            UserIdsMinHashLength = 5
+        },
+    }
+);
+
+mvcBuilder.AddShiftEntityOdata(x =>
+{
+    x.DefaultOptions();
+    x.RegisterAllDTOs(typeof(StockPlusPlus.Shared.Marker).Assembly);
+    x.RegisterShiftIdentityDashboardEntitySets();
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
     c.DocInclusionPredicate(SwaggerService.DocInclusionPredicate);
