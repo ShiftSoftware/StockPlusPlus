@@ -1,4 +1,5 @@
 ﻿using ShiftSoftware.ShiftEntity.Core;
+using ShiftSoftware.ShiftEntity.Model;
 using StockPlusPlus.Shared.Enums.Product;
 
 namespace StockPlusPlus.Data.Entities.Product;

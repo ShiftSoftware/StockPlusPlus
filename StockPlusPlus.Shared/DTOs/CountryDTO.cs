@@ -1,4 +1,4 @@
-﻿using ShiftSoftware.ShiftEntity.Core;
+﻿using ShiftSoftware.ShiftEntity.Model;
 using ShiftSoftware.ShiftEntity.Model.Dtos;
 
 namespace StockPlusPlus.Shared.DTOs;
