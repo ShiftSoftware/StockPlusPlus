@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StockPlusPlus.Data;
 
@@ -11,9 +12,10 @@ using StockPlusPlus.Data;
 namespace StockPlusPlus.Data.Migrations
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20231125213358_AddCustomFiledsToCompanyBranch")]
+    partial class AddCustomFiledsToCompanyBranch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.HasIndex("LastReplicationDate");
 
-                    b.ToTable("DeletedRowLogs", (string)null);
+                    b.ToTable("DeletedRowLogs");
                 });
 
             modelBuilder.Entity("ShiftSoftware.ShiftIdentity.Core.Entities.AccessTree", b =>
@@ -1052,7 +1054,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Countries", (string)null);
+                    b.ToTable("Countries");
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
@@ -1123,7 +1125,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Brands", (string)null);
+                    b.ToTable("Brands");
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
@@ -1209,7 +1211,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.HasIndex("ProductCategoryID");
 
-                    b.ToTable("Products", (string)null);
+                    b.ToTable("Products");
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
@@ -1286,7 +1288,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("ProductCategories", (string)null);
+                    b.ToTable("ProductCategories");
 
                     b.ToTable(tb => tb.IsTemporal(ttb =>
                         {
