@@ -43,10 +43,10 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
         //    "Identity", false, builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName")));
 
         x.SetUpReplication<DB, Service>(cosmosConnectionString, "test")
-            .Replicate<ServiceModel>("Services", (e, s) =>
+            .Replicate<ServiceModel>("Services", e =>
             {
-                var mapper = s.GetRequiredService<IMapper>();
-                return mapper.Map<ServiceModel>(e);
+                var mapper = e.Services.GetRequiredService<IMapper>();
+                return mapper.Map<ServiceModel>(e.Entity);
             });
     });
 }
