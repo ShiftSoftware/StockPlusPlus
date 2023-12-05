@@ -10,6 +10,12 @@ using Microsoft.Extensions.Azure;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using StockPlusPlus.Data.Entities.Product;
+using AutoMapper;
+using StockPlusPlus.Shared.DTOs.Product.ProductCategory;
+using System.Text.Json;
+using ShiftSoftware.ShiftIdentity.Core.Entities;
+using ShiftSoftware.ShiftIdentity.Core.ReplicationModels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +29,8 @@ builder.Services.RegisterShiftRepositories(typeof(StockPlusPlus.Data.Marker).Ass
 
 builder.Services.AddDbContext<DB>(dbOptionBuilder);
 
+var cosmosConnectionString = builder.Configuration.GetValue<string>("CosmosDb:ConnectionString")!;
+
 if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
 {
     builder.Services.AddShiftEntityCosmosDbReplicationTrigger(x =>
@@ -33,6 +41,13 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
 
         //x.Accounts.Add(new CosmosDBAccount(builder.Configuration.GetValue<string>("CosmosDb:ConnectionString")!,
         //    "Identity", false, builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName")));
+
+        x.SetUpReplication<DB, Service>(cosmosConnectionString, "test")
+            .Replicate<ServiceModel>("Services", (e, s) =>
+            {
+                var mapper = s.GetRequiredService<IMapper>();
+                return mapper.Map<ServiceModel>(e);
+            });
     });
 }
 
