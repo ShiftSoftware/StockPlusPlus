@@ -53,6 +53,11 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
         x.SetUpReplication<DB, CompanyBranch>(cosmosConnectionString, "test")
             .Replicate<CompanyBranchModel>("CompanyBranches");
 
+        x.SetUpReplication<DB, Company>(cosmosConnectionString, "test")
+            .Replicate<CompanyModel>("Companies")
+            .UpdatePropertyReference<CompanyModel, CompanyBranchModel>("CompanyBranches", x => x.Company,
+            (q, e) => q.Where(x => x.Company.id == e.Entity.ID.ToString()));
+
         x.SetUpReplication<DB, CompanyBranchService>(cosmosConnectionString, "test")
             .Replicate<CompanyBranchServiceModel>("CompanyBranches");
     });
