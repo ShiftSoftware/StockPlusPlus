@@ -38,7 +38,6 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
         //x.ConnectionString = builder.Configuration.GetValue<string>("CosmosDb:ConnectionString");
         //x.DefaultDatabaseName = builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName");
         x.AddShiftDbContext<DB>(dbOptionBuilder);
-
         //x.Accounts.Add(new CosmosDBAccount(builder.Configuration.GetValue<string>("CosmosDb:ConnectionString")!,
         //    "Identity", false, builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName")));
 
@@ -48,6 +47,12 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
                 var mapper = e.Services.GetRequiredService<IMapper>();
                 return mapper.Map<ServiceModel>(e.Entity);
             });
+
+        x.SetUpReplication<DB, CompanyBranch>(cosmosConnectionString, "test")
+            .Replicate<CompanyBranchModel>("CompanyBranches");
+
+        x.SetUpReplication<DB, CompanyBranchService>(cosmosConnectionString, "test")
+            .Replicate<CompanyBranchServiceModel>("CompanyBranches");
     });
 }
 
