@@ -46,7 +46,9 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
             {
                 var mapper = e.Services.GetRequiredService<IMapper>();
                 return mapper.Map<ServiceModel>(e.Entity);
-            });
+            })
+            .UpdateReference<CompanyBranchServiceModel>("CompanyBranches",
+                (q, e) => q.Where(x => x.id == e.Entity.ID.ToString() && x.ItemType == "Service"));
 
         x.SetUpReplication<DB, CompanyBranch>(cosmosConnectionString, "test")
             .Replicate<CompanyBranchModel>("CompanyBranches");
