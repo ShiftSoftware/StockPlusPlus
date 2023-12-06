@@ -13,7 +13,8 @@
                  TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Brand"
                  @bind-Key="@Key">
 
-                 <LocalizedTextField @bind-Value="TheItem.Name" Label="Name" />
+    <LocalizedTextField @bind-Value="TheItem.Name" T="BrandDTO" 
+                    Label="Name"/>
 
     @* <MudTextFieldExtended OnlyValidateIfDirty="true"
                           Label="Name"
