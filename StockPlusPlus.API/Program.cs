@@ -42,7 +42,9 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
         //    "Identity", false, builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName")));
 
         x.SetUpReplication<DB, Service>(cosmosConnectionString, "test")
-            .Replicate<ServiceModel>("Services", e =>
+            .Replicate("Services",
+            x => x.id,
+            e =>
             {
                 var mapper = e.Services.GetRequiredService<IMapper>();
                 return mapper.Map<ServiceModel>(e.Entity);
@@ -50,16 +52,27 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
             .UpdateReference<CompanyBranchServiceModel>("CompanyBranches",
                 (q, e) => q.Where(x => x.id == e.Entity.ID.ToString() && x.ItemType == "Service"));
 
+        x.SetUpReplication<DB, Region>(cosmosConnectionString, "test")
+            .Replicate<RegionModel>("Regions", x => x.id, x => x.RegionID, x => x.ItemType);
+
+        x.SetUpReplication<DB, City>(cosmosConnectionString, "test")
+            .Replicate<CityModel>("Regions", x => x.id, x => x.RegionID, x => x.ItemType,
+            e =>
+            {
+                var mapper = e.Services.GetRequiredService<IMapper>();
+                return mapper.Map<CityModel>(e.Entity);
+            });
+
         x.SetUpReplication<DB, CompanyBranch>(cosmosConnectionString, "test")
-            .Replicate<CompanyBranchModel>("CompanyBranches");
+            .Replicate<CompanyBranchModel>("CompanyBranches", x => x.id, x => x.BranchID, x => x.ItemType);
 
         x.SetUpReplication<DB, Company>(cosmosConnectionString, "test")
-            .Replicate<CompanyModel>("Companies")
+            .Replicate<CompanyModel>("Companies", x=> x.id)
             .UpdatePropertyReference<CompanyModel, CompanyBranchModel>("CompanyBranches", x => x.Company,
             (q, e) => q.Where(x => x.Company.id == e.Entity.ID.ToString()));
 
         x.SetUpReplication<DB, CompanyBranchService>(cosmosConnectionString, "test")
-            .Replicate<CompanyBranchServiceModel>("CompanyBranches");
+            .Replicate<CompanyBranchServiceModel>("CompanyBranches", x => x.id, x => x.BranchID, x => x.ItemType);
     });
 }
 
