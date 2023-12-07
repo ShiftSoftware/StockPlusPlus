@@ -8,8 +8,6 @@ using StockPlusPlus.Shared.Enums.Product;
 namespace StockPlusPlus.Data.Entities.Product;
 
 [TemporalShiftEntity]
-[ShiftEntityReplication<ProductModel>(ContainerName = "Product")]
-[ReplicationPartitionKey(nameof(ProductModel.ProductCategoryID), nameof(ProductModel.BrandID))]
 public class Product : ShiftEntity<Product>
 {
     public string Name { get; set; } = default!;
