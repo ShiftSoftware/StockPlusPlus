@@ -35,12 +35,6 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
 {
     builder.Services.AddShiftEntityCosmosDbReplicationTrigger(x =>
     {
-        //x.ConnectionString = builder.Configuration.GetValue<string>("CosmosDb:ConnectionString");
-        //x.DefaultDatabaseName = builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName");
-        x.AddShiftDbContext<DB>(dbOptionBuilder);
-        //x.Accounts.Add(new CosmosDBAccount(builder.Configuration.GetValue<string>("CosmosDb:ConnectionString")!,
-        //    "Identity", false, builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName")));
-
         x.SetUpReplication<DB, Service>(cosmosConnectionString, "test")
             .Replicate("Services",
             x => x.id,
