@@ -16,6 +16,7 @@ using StockPlusPlus.Shared.DTOs.Product.ProductCategory;
 using System.Text.Json;
 using ShiftSoftware.ShiftIdentity.Core.Entities;
 using ShiftSoftware.ShiftIdentity.Core.ReplicationModels;
+using ShiftSoftware.ShiftEntity.Model.Enums;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -168,7 +169,7 @@ if (app.Environment.EnvironmentName != "Test")
         CompanyShortCode = "SFT",
         CompanyExternalId = "-1",
         CompanyAlternativeExternalId = "shift-software",
-        CompanyType = ShiftSoftware.ShiftIdentity.Core.Enums.CompanyTypes.NotSpecified,
+        CompanyType = CompanyTypes.NotSpecified,
 
         CompanyBranchExternalId = "-11",
         CompanyBranchShortCode = "SFT-EBL"
