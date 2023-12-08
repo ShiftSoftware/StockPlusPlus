@@ -2,7 +2,6 @@
 
 using AutoMapper;
 using ShiftSoftware.ShiftEntity.Model.Dtos;
-using ShiftSoftware.ShiftEntity.Model.Extensions;
 using StockPlusPlus.Data.ReplicationModels;
 using StockPlusPlus.Shared.DTOs.Product.Product;
 
