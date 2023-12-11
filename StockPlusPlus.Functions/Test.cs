@@ -64,7 +64,7 @@ public class Test
                 return q.Where(x => x.ItemType == "Service" && x.id == id);
             },
             (q, r) => q.Where(x => x.id == r.RowID.ToString() && x.ItemType == "Service"))
-            .RunAsync(false);
+            .RunAsync(false, true);
 
         //await replication.SetUp<DB, CompanyBranchService>(connectionString, databaseId, x=> x.Include(i=> i.Service))
         //    .Replicate("CompanyBranches", x => this.mapper.Map<CompanyBranchServiceModel>(x))
