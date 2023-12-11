@@ -51,31 +51,31 @@ public class Test
         //    .Replicate<RegionModel>("Regions", x => this.mapper.Map<RegionModel>(x))
         //    .RunAsync();
 
-        await replication.SetUp<DB, CompanyBranch>(connectionString, databaseId, q => q.Include(x => x.Region).Include(x => x.Company))
-            .Replicate("CompanyBranches", x => this.mapper.Map<CompanyBranchModel>(x))
-            .RunAsync();
-
-        //await replication.SetUp<DB, Service>(connectionString, databaseId)
-        //    .Replicate("Services", x => this.mapper.Map<ServiceModel>(x))
-        //    .UpdateReference<CompanyBranchServiceModel>("CompanyBranches",
-        //    (q, e) =>
-        //    {
-        //        var id = e.ID.ToString();
-        //        return q.Where(x => x.ItemType == "Service" && x.id == id);
-        //    },
-        //    (q, r) => q.Where(x => x.id == r.RowID.ToString() && x.ItemType == "Service"))
+        //await replication.SetUp<DB, CompanyBranch>(connectionString, databaseId, q => q.Include(x => x.Region).Include(x => x.Company))
+        //    .Replicate("CompanyBranches", x => this.mapper.Map<CompanyBranchModel>(x))
         //    .RunAsync();
+
+        await replication.SetUp<DB, Service>(connectionString, databaseId)
+            .Replicate("Services", x => this.mapper.Map<ServiceModel>(x))
+            .UpdateReference<CompanyBranchServiceModel>("CompanyBranches",
+            (q, e) =>
+            {
+                var id = e.ID.ToString();
+                return q.Where(x => x.ItemType == "Service" && x.id == id);
+            },
+            (q, r) => q.Where(x => x.id == r.RowID.ToString() && x.ItemType == "Service"))
+            .RunAsync(false);
 
         //await replication.SetUp<DB, CompanyBranchService>(connectionString, databaseId, x=> x.Include(i=> i.Service))
         //    .Replicate("CompanyBranches", x => this.mapper.Map<CompanyBranchServiceModel>(x))
         //    .RunAsync();
 
-        await replication.SetUp<DB, Company>(connectionString, databaseId)
-            .Replicate("Companies", x => this.mapper.Map<CompanyModel>(x))
-            .UpdatePropertyReference<CompanyModel, CompanyBranchModel>("CompanyBranches", x => x.Company,
-            (q, e) => q.Where(x => x.Company.id == e.ID.ToString()),
-            (q, r) => q.Where(x => x.Company.id == r.RowID.ToString()))
-            .RunAsync();
+        //await replication.SetUp<DB, Company>(connectionString, databaseId)
+        //    .Replicate("Companies", x => this.mapper.Map<CompanyModel>(x))
+        //    .UpdatePropertyReference<CompanyModel, CompanyBranchModel>("CompanyBranches", x => x.Company,
+        //    (q, e) => q.Where(x => x.Company.id == e.ID.ToString()),
+        //    (q, r) => q.Where(x => x.Company.id == r.RowID.ToString()))
+        //    .RunAsync();
 
         //var braches = await this.db.CompanyBranches
         //    .ProjectTo<CompanyBranchModel>(this.mapper.ConfigurationProvider)
