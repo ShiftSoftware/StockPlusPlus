@@ -36,7 +36,7 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
 {
     builder.Services.AddShiftEntityCosmosDbReplicationTrigger(x =>
     {
-        x.SetUpReplication<DB, Service>(cosmosConnectionString, "test")
+        x.SetUpReplication<DB, Service>(cosmosConnectionString, "test", null, false)
             .Replicate("Services",
             x => x.id,
             e =>
