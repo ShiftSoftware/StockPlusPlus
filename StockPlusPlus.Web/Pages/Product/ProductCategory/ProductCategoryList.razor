@@ -8,15 +8,11 @@
            T="ProductCategoryListDTO"
            Dense
            DisableActionColumn
-            ComponentType="typeof(ProductCategoryForm)"
-            ShowIDColumn="true"
-            TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.ProductCategory"
+           ComponentType="typeof(ProductCategoryForm)"
+           ShowIDColumn="true"
+           TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.ProductCategory"
            EnableExport>
     <ButtonColumn Property="x => x.Name" Title="Name" />
 
-    <PropertyColumn Title="Tracking Method" Property="x=> x.TrackingMethod">
-        <CellTemplate>
-            <span>@context.Item!.TrackingMethod!.Describe()</span>
-        </CellTemplate>
-    </PropertyColumn>
+    <PropertyColumn Title="Tracking Method" Property="x=> x.TrackingMethod!.Describe()"/>
 </ShiftList>

@@ -13,7 +13,7 @@
                  TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.ProductCategory"
                  @bind-Key="@Key">
 
-                 <LocalizedTextField @bind-Value="TheItem.Name" Label="Name" />
+    <LocalizedTextField T="ProductCategoryDTO" @bind-Value="TheItem.Name" Label="Name" For="() => TheItem.Name"/>
 
     <MudTextFieldExtended OnlyValidateIfDirty="true"
                           Label="Name"
