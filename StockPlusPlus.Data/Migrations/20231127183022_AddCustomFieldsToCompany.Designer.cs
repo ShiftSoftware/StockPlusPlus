@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StockPlusPlus.Data;
 
@@ -11,9 +12,10 @@ using StockPlusPlus.Data;
 namespace StockPlusPlus.Data.Migrations
 {
     [DbContext(typeof(DB))]
-    partial class DBModelSnapshot : ModelSnapshot
+    [Migration("20231127183022_AddCustomFieldsToCompany")]
+    partial class AddCustomFieldsToCompany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,7 +34,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.Property<string>("ContainerName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("LastReplicationDate")
                         .HasColumnType("datetime2");
@@ -60,7 +62,7 @@ namespace StockPlusPlus.Data.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ContainerName", "LastReplicationDate");
+                    b.HasIndex("LastReplicationDate");
 
                     b.ToTable("DeletedRowLogs");
                 });

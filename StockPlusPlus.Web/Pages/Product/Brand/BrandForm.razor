@@ -13,12 +13,15 @@
                  TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Brand"
                  @bind-Key="@Key">
 
-    <LocalizedTextField T="BrandDTO" @bind-Value="TheItem.Name" Label="Name" For="() => TheItem.Name"/>
+    <LocalizedTextField @bind-Value="TheItem.Name"
+                        T="BrandDTO"
+                        For="() => TheItem.Name"
+                        Label="Name" />
 
     @* <MudTextFieldExtended OnlyValidateIfDirty="true"
-                          Label="Name"
-                          @bind-Value="TheItem.Name"
-                          For="@(() => TheItem.Name)" /> *@
+    Label="Name"
+    @bind-Value="TheItem.Name"
+    For="@(() => TheItem.Name)" /> *@
 
     @if (Mode == FormModes.View)
     {

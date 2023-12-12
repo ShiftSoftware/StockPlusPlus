@@ -10,6 +10,13 @@ using Microsoft.Extensions.Azure;
 using ShiftSoftware.TypeAuth.AspNetCore.Extensions;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using StockPlusPlus.Data.Entities.Product;
+using AutoMapper;
+using StockPlusPlus.Shared.DTOs.Product.ProductCategory;
+using System.Text.Json;
+using ShiftSoftware.ShiftIdentity.Core.Entities;
+using ShiftSoftware.ShiftIdentity.Core.ReplicationModels;
+using ShiftSoftware.ShiftEntity.Model.Enums;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,16 +30,44 @@ builder.Services.RegisterShiftRepositories(typeof(StockPlusPlus.Data.Marker).Ass
 
 builder.Services.AddDbContext<DB>(dbOptionBuilder);
 
+var cosmosConnectionString = builder.Configuration.GetValue<string>("CosmosDb:ConnectionString")!;
+
 if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
 {
     builder.Services.AddShiftEntityCosmosDbReplicationTrigger(x =>
     {
-        //x.ConnectionString = builder.Configuration.GetValue<string>("CosmosDb:ConnectionString");
-        //x.DefaultDatabaseName = builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName");
-        x.AddShiftDbContext<DB>(dbOptionBuilder);
+        x.SetUpReplication<DB, Service>(cosmosConnectionString, "test", null, false)
+            .Replicate("Services",
+            x => x.id,
+            e =>
+            {
+                var mapper = e.Services.GetRequiredService<IMapper>();
+                return mapper.Map<ServiceModel>(e.Entity);
+            })
+            .UpdateReference<CompanyBranchServiceModel>("CompanyBranches",
+                (q, e) => q.Where(x => x.id == e.Entity.ID.ToString() && x.ItemType == "Service"));
 
-        //x.Accounts.Add(new CosmosDBAccount(builder.Configuration.GetValue<string>("CosmosDb:ConnectionString")!,
-        //    "Identity", false, builder.Configuration.GetValue<string>("CosmosDb:DefaultDatabaseName")));
+        x.SetUpReplication<DB, Region>(cosmosConnectionString, "test")
+            .Replicate<RegionModel>("Regions", x => x.id, x => x.RegionID, x => x.ItemType);
+
+        x.SetUpReplication<DB, City>(cosmosConnectionString, "test")
+            .Replicate<CityModel>("Regions", x => x.id, x => x.RegionID, x => x.ItemType,
+            e =>
+            {
+                var mapper = e.Services.GetRequiredService<IMapper>();
+                return mapper.Map<CityModel>(e.Entity);
+            });
+
+        x.SetUpReplication<DB, CompanyBranch>(cosmosConnectionString, "test")
+            .Replicate<CompanyBranchModel>("CompanyBranches", x => x.id, x => x.BranchID, x => x.ItemType);
+
+        x.SetUpReplication<DB, Company>(cosmosConnectionString, "test")
+            .Replicate<CompanyModel>("Companies", x=> x.id)
+            .UpdatePropertyReference<CompanyModel, CompanyBranchModel>("CompanyBranches", x => x.Company,
+            (q, e) => q.Where(x => x.Company.id == e.Entity.ID.ToString()));
+
+        x.SetUpReplication<DB, CompanyBranchService>(cosmosConnectionString, "test")
+            .Replicate<CompanyBranchServiceModel>("CompanyBranches", x => x.id, x => x.BranchID, x => x.ItemType);
     });
 }
 
@@ -134,7 +169,7 @@ if (app.Environment.EnvironmentName != "Test")
         CompanyShortCode = "SFT",
         CompanyExternalId = "-1",
         CompanyAlternativeExternalId = "shift-software",
-        CompanyType = ShiftSoftware.ShiftIdentity.Core.Enums.CompanyTypes.NotSpecified,
+        CompanyType = CompanyTypes.NotSpecified,
 
         CompanyBranchExternalId = "-11",
         CompanyBranchShortCode = "SFT-EBL"

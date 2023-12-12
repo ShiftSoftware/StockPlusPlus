@@ -1,4 +1,5 @@
 ﻿
+using ShiftSoftware.ShiftEntity.Model;
 using ShiftSoftware.ShiftEntity.Model.Dtos;
 using StockPlusPlus.Shared.DTOs.Product.ProductCategory;
 using StockPlusPlus.Shared.Enums.Product;
@@ -12,7 +13,10 @@ public class ProductListDTO : ShiftEntityListDTO
     public override string? ID { get; set; }
     public string Name { get; set; } = default!;
 
+    [JsonConverter(typeof(LocalizedTextJsonConverter))]
     public string? Brand { get; set; }
+
+    [JsonConverter(typeof(LocalizedTextJsonConverter))]
     public string? Category { get; set; }
 
     [_ProductCategoryHashId]

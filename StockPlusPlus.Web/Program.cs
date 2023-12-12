@@ -63,8 +63,9 @@ builder.Services.AddShiftIdentityDashboardBlazor(x =>
 
         //ToDoActions.DataLevelAccess.Statuses.Expand(Enum.GetValues<ToDo.Shared.Enums.ToDoStatus>().Select(x => new KeyValuePair<string, string>(((int)x).ToString(), x.Describe())).ToList());
     };
-    x.AddCompanyBranchCustomField("Username")
-        .AddCompanyBranchCustomField("Password", true);
+    x.AddCompanyBranchCustomField("Username", "User Name")
+        .AddCompanyBranchCustomField("Password", true)
+        .AddCompanyCustomField("AutolineLink","Autoline Link");
 });
 
 builder.Services.AddTypeAuth(x =>
