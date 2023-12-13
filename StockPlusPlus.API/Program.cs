@@ -47,8 +47,10 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
             .UpdateReference<CompanyBranchServiceModel>("CompanyBranches",
                 (q, e) => q.Where(x => x.id == e.Entity.ID.ToString() && x.ItemType == "Service"));
 
-        x.SetUpReplication<DB, Region>(cosmosConnectionString, "test")
-            .Replicate<RegionModel>("Regions", x => x.id, x => x.RegionID, x => x.ItemType);
+        x.SetUpReplication<DB, Region>(cosmosConnectionString, "test2")
+            .Replicate<RegionModel>("Regions", x => x.id, x => x.RegionID, x => x.ItemType)
+            .UpdatePropertyReference<RegionModel, CompanyBranchModel>("CompanyBranches", x => x.City.Region,
+            (q, e) => q.Where(x => x.City.Region.id == e.Entity.ID.ToString() && x.ItemType == "Branch"));
 
         x.SetUpReplication<DB, City>(cosmosConnectionString, "test")
             .Replicate<CityModel>("Regions", x => x.id, x => x.RegionID, x => x.ItemType,
@@ -56,7 +58,9 @@ if (builder.Configuration.GetValue<bool>("CosmosDb:Enabled"))
             {
                 var mapper = e.Services.GetRequiredService<IMapper>();
                 return mapper.Map<CityModel>(e.Entity);
-            });
+            })
+            .UpdatePropertyReference<CityCompanyBranchModel, CompanyBranchModel>("CompanyBranches", x => x.City,
+            (q, e) => q.Where(x => x.City.id == e.Entity.ID.ToString() && x.ItemType == "Branch"));
 
         x.SetUpReplication<DB, CompanyBranch>(cosmosConnectionString, "test")
             .Replicate<CompanyBranchModel>("CompanyBranches", x => x.id, x => x.BranchID, x => x.ItemType);
