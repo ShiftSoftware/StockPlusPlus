@@ -39,11 +39,6 @@
 @code {
     private DateTime Date = DateTime.Now;
 
-    protected override async System.Threading.Tasks.Task OnInitializedAsync()
-    {
-      
-    }
-
     public void OpenForm<T>(string id) where T : ComponentBase
     {
         _ = ShiftModal.Open<T>(id, ModalOpenMode.Popup);

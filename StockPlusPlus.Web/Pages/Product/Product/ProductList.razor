@@ -64,6 +64,8 @@
 
     protected override void OnInitialized()
     {
+        var filter = new ODataFilter();
+
         if (!string.IsNullOrWhiteSpace(ProductCategoryID))
         {
             AddDialogParameters[nameof(ProductForm.ProductCategoryID)] = ProductCategoryID;
