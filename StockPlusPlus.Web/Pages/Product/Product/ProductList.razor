@@ -9,20 +9,21 @@
 @using StockPlusPlus.Web.Pages.Product.ProductCategory;
 
 <ShiftList EntitySet="Product"
-           Title="Product List"
-           T="ProductListDTO"
-           Dense
-            DefaultFilters="DefaultFilters"
+            Title="Product List"
+            T="ProductListDTO"
+            Dense
+            FilterString="@Filters"
             ComponentType="typeof(ProductForm)"
             ShowIDColumn="true"
             TypeAuthAction="StockPlusPlus.Shared.ActionTrees.StockActionTrees.Product"
             AddDialogParameters="AddDialogParameters"
-           EnableExport>
-    <PropertyColumn Property="x => x.Name" Title="Name" />
-    <PropertyColumn Format="F" Property="x => x.LastSaveDate.DateTime" Title="SaveDate" />
+            EnableExport>
 
-    <PropertyColumn Format="F" Property="x => x.ReleaseDate.DateTime" Title="Release Date">
-        <CellTemplate>
+        <PropertyColumn Property="x => x.Name" Title="Name" />
+        <PropertyColumn Format="F" Property="x => x.LastSaveDate.DateTime" Title="SaveDate" />
+
+        <PropertyColumn Format="F" Property="x => x.ReleaseDate.DateTime" Title="Release Date">
+            <CellTemplate>
             @if (context?.Item?.ReleaseDate.DateTime > DateTimeOffset.MinValue)
             {
                 @context.Item.ReleaseDate.DateTime
@@ -33,18 +34,19 @@
     <ButtonColumn ComponentType="typeof(BrandForm)" KeyPropertyName="@nameof(ProductListDTO.BrandID)" Property="x => x.Brand" Title="Brand">
         <ButtonTemplate>
             <MudChip Style="cursor: pointer;" Icon="@Icons.Material.Filled.BrandingWatermark" Variant="Variant.Outlined">@context</MudChip>
-            </ButtonTemplate>
-        </ButtonColumn>
-        <ForeignColumn IsButtonColumn
-                    ComponentType="typeof(ProductCategoryForm)"
-                    Property="x => x.ProductCategoryID"
-                    Title="Category"
-                    T="ProductListDTO"
-                    TEntity="ProductCategoryListDTO"
-                    TProperty="string"
-                    EntitySetName="ProductCategory"
-                    OpenMode="ModalOpenMode.NewTab" />
- </ShiftList>
+        </ButtonTemplate>
+    </ButtonColumn>
+
+    <ForeignColumn IsButtonColumn
+                ComponentType="typeof(ProductCategoryForm)"
+                Property="x => x.ProductCategoryID"
+                Title="Category"
+                T="ProductListDTO"
+                TEntity="ProductCategoryListDTO"
+                TProperty="string"
+                EntitySet="ProductCategory"
+                OpenMode="ModalOpenMode.NewTab" />
+    </ShiftList>
 
  @code {
 
@@ -58,24 +60,24 @@
     [SupplyParameterFromQuery]
     public string? BrandID { get; set; }
 
-    public List<string> DefaultFilters = new();
+    public string? Filters;
 
     protected override void OnInitialized()
     {
-        AddDialogParameters = new();
-
         if (!string.IsNullOrWhiteSpace(ProductCategoryID))
         {
             AddDialogParameters[nameof(ProductForm.ProductCategoryID)] = ProductCategoryID;
 
-            DefaultFilters.Add($"{nameof(ProductListDTO.ProductCategoryID)} eq '{ProductCategoryID}'");
+            filter.Add(nameof(ProductListDTO.ProductCategoryID), ODataOperator.Equal, ProductCategoryID);
         }
 
         if (!string.IsNullOrWhiteSpace(BrandID))
         {
             AddDialogParameters[nameof(ProductForm.BrandID)] = BrandID;
 
-            DefaultFilters.Add($"{nameof(ProductListDTO.BrandID)} eq '{BrandID}'");
+            filter.Add(nameof(ProductListDTO.BrandID), ODataOperator.Equal, BrandID);
         }
+
+        Filters = filter.ToString();
     }
 }
