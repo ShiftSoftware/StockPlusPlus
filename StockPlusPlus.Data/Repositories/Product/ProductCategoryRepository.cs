@@ -15,7 +15,7 @@ public class ProductCategoryRepository : ShiftRepository<DB, ProductCategory, Pr
     {
     }
 
-    public async Task<Stream> Print(string id)
+    public override async Task<Stream> PrintAsync(string id)
     {
         var longId = ShiftEntityHashIdService.Decode<ProductCategoryDTO>(id);
 

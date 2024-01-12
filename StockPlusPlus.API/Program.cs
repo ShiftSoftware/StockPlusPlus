@@ -82,6 +82,12 @@ var mvcBuilder = builder.Services
     .AddHttpContextAccessor()
     .AddControllers();
 
+builder.Services.AddShiftEntityPrint(x =>
+{
+    x.TokenExpirationInSeconds = 600;
+    x.SASTokenKey = "One-Two-Three";
+});
+
 mvcBuilder.AddShiftEntityWeb(x =>
 {
     x.WrapValidationErrorResponseWithShiftEntityResponse(true);
