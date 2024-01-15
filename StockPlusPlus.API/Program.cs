@@ -126,7 +126,7 @@ mvcBuilder.AddShiftIdentityDashboard<DB>(
         RefreshToken = new TokenSettingsModel
         {
             Audience = "stock-plus-plus",
-            ExpireSeconds = 60000000,
+            ExpireSeconds = 100000,
             Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
             Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
         },
