@@ -4,6 +4,7 @@ dotnet sln remove ..\ShiftEntity\ShiftEntity.Core\ShiftEntity.Core.csproj
 dotnet sln remove ..\ShiftEntity\ShiftEntity.Web\ShiftEntity.Web.csproj
 dotnet sln remove ..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj
 dotnet sln remove ..\ShiftEntity\ShiftEntity.CosmosDbReplication\ShiftEntity.CosmosDbReplication.csproj
+dotnet sln remove ..\ShiftEntity\ShiftEntity.Print\ShiftEntity.Print.csproj
 
 dotnet sln remove ..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj
 dotnet sln remove ..\ShiftBlazor\ShiftBlazor.Tests\ShiftBlazor.Tests.csproj
