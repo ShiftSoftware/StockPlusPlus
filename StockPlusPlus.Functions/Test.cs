@@ -1,23 +1,12 @@
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using ShiftSoftware.ShiftEntity.CosmosDbReplication.Services;
 using ShiftSoftware.ShiftIdentity.Core.Entities;
 using ShiftSoftware.ShiftIdentity.Core.ReplicationModels;
 using StockPlusPlus.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace StockPlusPlus.Functions;
 
@@ -39,10 +28,9 @@ public class Test
         this.db = db;
     }
 
-    [FunctionName("Test")]
-    public async Task<IActionResult> Run(
-        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-        ILogger log)
+    [Function("Test")]
+    public async Task<HttpResponseData> Run(
+        [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequestData req)
     {
         var connectionString = config.GetValue<string>("CosmosDb:ConnectionString");
         var databaseId = config.GetValue<string>("CosmosDb:DefaultDatabaseName");
@@ -88,7 +76,7 @@ public class Test
         //var braches = await Query();
 
         //return new OkObjectResult(braches);
-        return new OkObjectResult("Success");
+        return req.CreateResponse(System.Net.HttpStatusCode.OK);
     }
 
     private async Task<IEnumerable<TResult>> Query<TResult>(Func<IQueryable<CompanyBranch>,IQueryable<TResult>> query)

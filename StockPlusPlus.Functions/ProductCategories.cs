@@ -1,12 +1,8 @@
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Extensions.Http;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using StockPlusPlus.Data.Repositories.Product;
+using Microsoft.Azure.Functions.Worker;
+using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
+using StockPlusPlus.Data.Repositories.Product;
+using System.Net;
 
 namespace StockPlusPlus.Functions
 {
@@ -18,10 +14,9 @@ namespace StockPlusPlus.Functions
             this.productCategoryRepository = productCategoryRepository;
         }
 
-        [FunctionName("ProductCategories")]
-        public async Task<IActionResult> Get(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+        [Function("ProductCategories")]
+        public async Task<HttpResponseData> Get(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequestData req)
         {
             var allProductCategories = await this.productCategoryRepository.OdataList().ToArrayAsync();
 
@@ -39,7 +34,14 @@ namespace StockPlusPlus.Functions
                 FirstProductCategory = productCategory is null ? null : await this.productCategoryRepository.ViewAsync(productCategory)
             });
 
-            return new OkObjectResult(responseMessage);
+            var response = req.CreateResponse(HttpStatusCode.OK);
+            await response.WriteAsJsonAsync(new
+            {
+                AllProducts = allProductCategories,
+                FirstProductCategory = productCategory is null ? null : await this.productCategoryRepository.ViewAsync(productCategory)
+            });
+
+            return response;
         }
     }
 }
