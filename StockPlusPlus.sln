@@ -3,21 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Shared", "StockPlusPlus.Shared\StockPlusPlus.Shared.csproj", "{5E6AAA85-E011-43A6-A15A-A139F5F5E7F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Shared", "ShiftSoftware.Templates\content\shiftFramework\StockPlusPlus.Shared\StockPlusPlus.Shared.csproj", "{5E6AAA85-E011-43A6-A15A-A139F5F5E7F8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Data", "StockPlusPlus.Data\StockPlusPlus.Data.csproj", "{2B356D62-C41F-4575-A67D-2A10EF32D348}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Data", "ShiftSoftware.Templates\content\shiftFramework\StockPlusPlus.Data\StockPlusPlus.Data.csproj", "{2B356D62-C41F-4575-A67D-2A10EF32D348}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.API", "StockPlusPlus.API\StockPlusPlus.API.csproj", "{55183F24-9642-44F3-B930-D547980F3E97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.API", "ShiftSoftware.Templates\content\shiftFramework\StockPlusPlus.API\StockPlusPlus.API.csproj", "{55183F24-9642-44F3-B930-D547980F3E97}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Test", "StockPlusPlus.Test\StockPlusPlus.Test.csproj", "{FDF7449B-ED4F-44C7-8B2A-956CF45E337D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Test", "ShiftSoftware.Templates\content\shiftFramework\StockPlusPlus.Test\StockPlusPlus.Test.csproj", "{FDF7449B-ED4F-44C7-8B2A-956CF45E337D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Web", "StockPlusPlus.Web\StockPlusPlus.Web.csproj", "{656427A0-3E14-4C43-B69B-0F259EDE18F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Web", "ShiftSoftware.Templates\content\shiftFramework\StockPlusPlus.Web\StockPlusPlus.Web.csproj", "{656427A0-3E14-4C43-B69B-0F259EDE18F5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShiftFramework", "ShiftFramework", "{6B5137B3-F21C-483E-B131-54706EE91D55}"
 	ProjectSection(SolutionItems) = preProject
-		ImportAndReferenceAll.bat = ImportAndReferenceAll.bat
-		RemoveAll.bat = RemoveAll.bat
-		ShiftFrameworkGlobalSettings.props = ShiftFrameworkGlobalSettings.props
+		ShiftSoftware.Templates\content\shiftFramework\ImportAndReferenceAll.bat = ShiftSoftware.Templates\content\shiftFramework\ImportAndReferenceAll.bat
+		ShiftSoftware.Templates\content\shiftFramework\RemoveAll.bat = ShiftSoftware.Templates\content\shiftFramework\RemoveAll.bat
+		ShiftSoftware.Templates\content\shiftFramework\ShiftFrameworkGlobalSettings.props = ShiftSoftware.Templates\content\shiftFramework\ShiftFrameworkGlobalSettings.props
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ShiftEntity", "ShiftEntity", "{6A39A98D-C259-4E77-91C7-B2DF19272AF6}"
@@ -62,7 +62,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TestingTools", "TestingTool
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftFrameworkTestingTools", "..\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj", "{2913C2C6-A96C-428F-8548-1CE9FE8E80B2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Functions", "StockPlusPlus.Functions\StockPlusPlus.Functions.csproj", "{D781393E-1509-4ABC-BEA2-404A3F829548}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlusPlus.Functions", "ShiftSoftware.Templates\content\shiftFramework\StockPlusPlus.Functions\StockPlusPlus.Functions.csproj", "{D781393E-1509-4ABC-BEA2-404A3F829548}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShiftSoftware.Templates", "ShiftSoftware.Templates\ShiftSoftware.Templates.csproj", "{B13F8630-7F5B-4EB2-9F33-171A7FC43A48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -158,6 +160,10 @@ Global
 		{D781393E-1509-4ABC-BEA2-404A3F829548}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D781393E-1509-4ABC-BEA2-404A3F829548}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D781393E-1509-4ABC-BEA2-404A3F829548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B13F8630-7F5B-4EB2-9F33-171A7FC43A48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B13F8630-7F5B-4EB2-9F33-171A7FC43A48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B13F8630-7F5B-4EB2-9F33-171A7FC43A48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B13F8630-7F5B-4EB2-9F33-171A7FC43A48}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

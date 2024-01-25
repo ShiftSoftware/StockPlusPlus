@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!--#if (removeReferences == true) -->
 	<Import Project="..\ShiftFrameworkGlobalSettings.props" />
-
+	<!--#endif -->
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
@@ -12,7 +13,9 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.3" />
+		<!--#if (removeReferences == true) -->
 		<PackageReference Include="ShiftSoftware.ShiftFrameworkTestingTools" Version="$(ShiftFrameworkVersion)" />
+		<!--#endif -->
 		<PackageReference Include="xunit" Version="2.6.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
 			<PrivateAssets>all</PrivateAssets>
@@ -22,8 +25,9 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\StockPlusPlus.API\StockPlusPlus.API.csproj" />
-
+		<!--#if (removeReferences == true) -->
 		<ProjectReference Include="..\..\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj" Condition="Exists('..\..\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools\ShiftFrameworkTestingTools.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+		<!--#endif -->
 	</ItemGroup>
 
 	<ItemGroup>

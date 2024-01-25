@@ -1,0 +1,326 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Shift Software",
+  "classifications": [ "Shift Software", "Web" ],
+  "identity": "ShiftSoftware.ShiftFramework",
+  "name": "Shift Framework Project",
+  "shortName": "shiftFramework",
+  "sourceName": "StockPlusPlus",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "guids": [
+    "{55183F24-9642-44F3-B930-D547980F3E97}",
+    "{2B356D62-C41F-4575-A67D-2A10EF32D348}",
+    "{5E6AAA85-E011-43A6-A15A-A139F5F5E7F8}",
+    "{656427A0-3E14-4C43-B69B-0F259EDE18F5}",
+    "{D781393E-1509-4ABC-BEA2-404A3F829548}",
+    "{FDF7449B-ED4F-44C7-8B2A-956CF45E337D}"
+  ],
+  "primaryOutputs": [
+    {
+      "path": "StockPlusPlus.API\\StockPlusPlus.API.csproj"
+    },
+    {
+      "path": "StockPlusPlus.Data\\StockPlusPlus.Data.csproj"
+    },
+    {
+      "path": "StockPlusPlus.Shared\\StockPlusPlus.Shared.csproj"
+    },
+    {
+      "path": "StockPlusPlus.Web\\StockPlusPlus.Web.csproj"
+    },
+    {
+      "path": "StockPlusPlus.Functions\\StockPlusPlus.Functions.csproj"
+    },
+    {
+      "path": "StockPlusPlus.Test\\StockPlusPlus.Test.csproj"
+    }
+  ],
+  "sources": [
+    {
+      "exclude": [
+        "**/[Bb]in/**",
+        "**/[Oo]bj/**",
+        ".template.config/**/*",
+        "**/*.filelist",
+        "**/*.user",
+        "**/*.lock.json",
+        "**/.git/**",
+        "**/.github/**",
+        "**/.vs/**",
+        "**/.gitignore",
+        "**/.gitattributes",
+        "ImportAndReferenceAll.bat",
+        "RemoveAll.bat",
+        "ShiftFrameworkGlobalSettings.props"
+      ],
+      "modifiers": [
+        {
+          "exclude": "**/StockPlusPlus.Functions/**",
+          "condition": "(!addFunctions)"
+        },
+        {
+          "exclude": "**/StockPlusPlus.Test/**",
+          "condition": "(!addTest)"
+        }
+      ]
+    }
+  ],
+  "symbols": {
+    "addFunctions": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Add functions project",
+      "displayName": "Add Functions",
+       "isRequired": false,
+      "defaultValue": "false",
+      "isEnabled": true
+    },
+    "addTest": {
+      "type": "parameter",
+      "datatype": "bool",
+      "description": "Add Test project",
+      "displayName": "Add Test",
+      "isRequired": false,
+      "defaultValue": "false",
+      "isEnabled": true
+    },
+    "removeReferences": {
+      "type": "generated",
+      "generator": "constant",
+      "datatype": "bool",
+      "description": "Remove references",
+      "parameters": { "value": "true" }
+    }
+  },
+  "postActions": [
+    {
+      "Description": "Adding Shift Software Packages to API project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftEntity.Web package to API project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.API.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftEntity.Web",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to API project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore package to API project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.API.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftIdentity.Dashboard.AspNetCore",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to API project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftEntity.Print package to API project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.API.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftEntity.Print",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Data project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftEntity.Print package to Data project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Data.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftEntity.EFCore",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Data project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftEntity.Print package to Data project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Data.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftEntity.Print",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Data project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftIdentity.Data package to Data project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Data.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftIdentity.Data",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Functions project",
+      "condition": "(addFunctions)",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftIdentity.Data package to Functions project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Functions.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftEntity.EFCore",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Shared project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftIdentity.Data package to Shared project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Shared.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftEntity.CosmosDbReplication",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Shared project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftIdentity.Data package to Shared project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Shared.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftEntity.Model",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Shared project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftIdentity.Data package to Shared project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Shared.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.TypeAuth.Core",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Test project",
+      "condition": "(addTest)",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftFrameworkTestingTools package to Test project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Test.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftFrameworkTestingTools",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Web project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftBlazor package to Web project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Web.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftBlazor",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Web project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftIdentity.Blazor package to Web project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Web.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftIdentity.Blazor",
+        "projectFileExtensions": "*.csproj"
+      }
+    },
+    {
+      "Description": "Adding Shift Software Packages to Web project",
+      "actionId": "B17581D1-C5C9-4489-8F0A-004BE667B814",
+      "ContinueOnError": "true",
+      "manualInstructions": [
+        {
+          "text": "Manually add ShiftSoftware.ShiftFrameworkTestingTools package to Web project"
+        }
+      ],
+      "args": {
+        "targetFiles": "**/StockPlusPlus.Web.csproj",
+        "referenceType": "package",
+        "reference": "ShiftSoftware.ShiftIdentity.Dashboard.Blazor",
+        "projectFileExtensions": "*.csproj"
+      }
+    }
+  ]
+}

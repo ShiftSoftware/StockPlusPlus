@@ -1,5 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+	<!--#if (removeReferences == true) -->
 	<Import Project="..\ShiftFrameworkGlobalSettings.props" />
+	<!--#endif -->
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<Nullable>enable</Nullable>
@@ -7,27 +9,23 @@
 		<BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
 	</PropertyGroup>
 
-
-
-
-
-
-
-
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.13" />
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.13" PrivateAssets="all" />
+		<!--#if (removeReferences == true) -->
 		<PackageReference Include="ShiftSoftware.ShiftBlazor" Version="$(ShiftFrameworkVersion)" />
 		<PackageReference Include="ShiftSoftware.ShiftIdentity.Blazor" Version="$(ShiftFrameworkVersion)" />
 		<PackageReference Include="ShiftSoftware.ShiftIdentity.Dashboard.Blazor" Version="$(ShiftFrameworkVersion)" />
+		<!--#endif -->
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\StockPlusPlus.Shared\StockPlusPlus.Shared.csproj" />
-
+		<!--#if (removeReferences == true) -->
 		<ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj" Condition="Exists('..\..\ShiftIdentity\ShiftIdentity.Dashboard.Blazor\ShiftIdentity.Dashboard.Blazor.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
 		<ProjectReference Include="..\..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj" Condition="Exists('..\..\ShiftIdentity\ShiftIdentity.Blazor\ShiftIdentity.Blazor.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
 		<ProjectReference Include="..\..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj" Condition="Exists('..\..\ShiftBlazor\ShiftBlazor\ShiftBlazor.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+		<!--#endif -->
 	</ItemGroup>
 
 </Project>

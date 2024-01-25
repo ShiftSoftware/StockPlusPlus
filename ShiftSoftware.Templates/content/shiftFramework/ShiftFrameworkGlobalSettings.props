@@ -1,6 +1,6 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<PropertyGroup>
-		<ImportShiftFrameworkProjects>true</ImportShiftFrameworkProjects>
+		<ImportShiftFrameworkProjects>false</ImportShiftFrameworkProjects>
 		<ShiftFrameworkVersion>2024.01.02.1</ShiftFrameworkVersion>
 	</PropertyGroup>
 </Project>

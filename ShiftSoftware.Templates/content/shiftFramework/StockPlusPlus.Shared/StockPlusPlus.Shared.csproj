@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!--#if (removeReferences == true) -->
+	<Import Project="..\ShiftFrameworkGlobalSettings.props" />
+	<!--#endif -->
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!--#if (removeReferences == true) -->
+		<PackageReference Include="ShiftSoftware.ShiftEntity.CosmosDbReplication" Version="$(ShiftFrameworkVersion)" />
+		<PackageReference Include="ShiftSoftware.ShiftEntity.Model" Version="$(ShiftFrameworkVersion)" />
+		<PackageReference Include="ShiftSoftware.TypeAuth.Core" Version="$(ShiftFrameworkVersion)" />
+		<!--#endif -->
+	</ItemGroup>
+</Project>

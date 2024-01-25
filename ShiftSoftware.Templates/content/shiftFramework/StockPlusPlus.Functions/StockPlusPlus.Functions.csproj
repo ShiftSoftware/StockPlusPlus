@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!--#if (removeReferences == true) -->
 	<Import Project="..\ShiftFrameworkGlobalSettings.props" />
-
+	<!--#endif -->
 	<PropertyGroup>
 		<TargetFramework>net6.0</TargetFramework>
 		<AzureFunctionsVersion>v4</AzureFunctionsVersion>
 		<!--<_FunctionsSkipCleanOutput>true</_FunctionsSkipCleanOutput>-->
-	  <UserSecretsId>1fad2a95-8f41-4ec1-bbd2-f40a3c3f86ac</UserSecretsId>
-  </PropertyGroup>
+		<UserSecretsId>1fad2a95-8f41-4ec1-bbd2-f40a3c3f86ac</UserSecretsId>
+	</PropertyGroup>
 
 	<ItemGroup>
 		<!--Functions Runtime contain a version of System.Text.Json. The ShiftEntity.Model contains a newer version.
@@ -18,17 +19,20 @@
 		setting _FunctionsSkipCleanOutput is not very efficient though
 		-->
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Azure.Functions.Extensions" Version="1.1.0" />
 		<PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.2.0" />
-
+		<!--#if (removeReferences == true) -->
 		<PackageReference Include="ShiftSoftware.ShiftEntity.EFCore" Version="$(ShiftFrameworkVersion)" />
+		<!--#endif -->
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\StockPlusPlus.Data\StockPlusPlus.Data.csproj" />
-		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj" Condition="Exists('..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj') And '$(ImportShiftFrameworkProjects)'=='true'" />
+		<!--#if (removeReferences == true) -->
+		<ProjectReference Include="..\..\ShiftEntity\ShiftEntity.EFCore\ShiftEntity.EFCore.csproj" />
+		<!--#endif -->
 	</ItemGroup>
 
 	<ItemGroup>
