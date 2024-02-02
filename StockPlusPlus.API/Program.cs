@@ -113,7 +113,7 @@ mvcBuilder.AddShiftIdentityDashboard<DB>(
         ShiftIdentityHostingType = ShiftIdentityHostingTypes.Internal,
         Token = new TokenSettingsModel
         {
-            ExpireSeconds = 60000,
+            ExpireSeconds = 600000,
             Issuer = builder.Configuration.GetValue<string>("Settings:TokenSettings:Issuer")!,
             Key = builder.Configuration.GetValue<string>("Settings:TokenSettings:Key")!,
         },
